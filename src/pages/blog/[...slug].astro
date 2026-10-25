@@ -5,10 +5,17 @@ import BlogPost from '../../layouts/BlogPost.astro';
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((post) => ({
-		params: { slug: post.id },
+	//	params: { slug: post.id },
+	params: { 
+	// Removes the first 11 characters ("YYYY-MM-DD-")
+      slug: post.id.slice(11)
+	},
 		props: post,
+
 	}));
 }
+
+
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
@@ -16,6 +23,7 @@ const post = Astro.props;
 if (!post) 
 	return Astro.rewrite('/404');
 const { Content } = await render(post);
+
 ---
 
 <BlogPost {...post.data}>
