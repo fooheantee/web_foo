@@ -7,10 +7,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://heantee.foo',
-
   // Explicitly set the output to static generation (SSG)
   output: 'static',
-
   integrations: [mdx(), sitemap()],
 
   fonts: [
