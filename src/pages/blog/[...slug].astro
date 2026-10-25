@@ -12,6 +12,11 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
+// If Astro.props is empty (which happens if a slug wasn't built in getStaticPaths)
+if (!post) 
+	return Astro.rewrite('/404');
+}
+
 const { Content } = await render(post);
 ---
 
