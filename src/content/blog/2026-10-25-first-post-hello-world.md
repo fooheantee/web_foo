@@ -2,7 +2,8 @@
 title: 'Hello, World: Why I Built This Site'
 description: 'Hello, World: Why I Built This Site'
 pubDate: 'Oct 25 2026'
-[//]: # heroImage: '../../assets/blog-placeholder-3.jpg'
+slug: "first-post-hello"
+[//]: # heroImage: '../../assets/blog-placeholder-.jpg'
 ---
 I finally have a personal website. 🎉
 For my first post, I thought I’d share the backstory.
