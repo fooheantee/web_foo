@@ -2,7 +2,7 @@
 // src/components/ThemeSelector.astro
 ---
 
-<button aria-label="Toggle theme" class="theme-toggle-btn">
+<button type="button" aria-label="Toggle theme" class="theme-toggle-btn">
 	<svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 		<circle cx="12" cy="12" r="4"></circle>
 		<path d="M12 2v2"></path>
@@ -21,24 +21,18 @@
 </button>
 
 <script>
-	const setupToggle = () => {
-		const toggleBtns = document.querySelectorAll('.theme-toggle-btn');
-		if (!toggleBtns.length) return;
+	document.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement | null;
+		const toggleBtn = target?.closest('.theme-toggle-btn');
+		if (!toggleBtn) return;
 
-		toggleBtns.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				const isDark = document.documentElement.classList.contains('dark');
-				const newTheme = isDark ? 'light' : 'dark';
-				
-				document.documentElement.classList.toggle('dark', !isDark);
-				document.documentElement.setAttribute('data-theme', newTheme);
-				localStorage.setItem('theme', newTheme);
-			});
-		});
-	};
+		const isDark = document.documentElement.classList.contains('dark');
+		const newTheme = isDark ? 'light' : 'dark';
 
-	setupToggle();
-	document.addEventListener('astro:page-load', setupToggle);
+		document.documentElement.classList.toggle('dark', !isDark);
+		document.documentElement.setAttribute('data-theme', newTheme);
+		localStorage.setItem('theme', newTheme);
+	});
 </script>
 
 <style>
@@ -54,7 +48,7 @@
 		min-width: 40px;
 		min-height: 40px;
 		z-index: 50;
-		color: var(--text-color); 
+		color: var(--text-color);
 		transition: background-color 0.2s ease, color 0.2s ease;
 	}
 
@@ -62,6 +56,7 @@
 		width: 24px !important;
 		height: 24px !important;
 		display: block;
+		pointer-events: none;
 	}
 
 	.sun-icon { display: none !important; }
