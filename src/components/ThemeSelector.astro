@@ -20,18 +20,21 @@
 	</svg>
 </button>
 
-<script>
-	document.addEventListener('click', (event) => {
-		const target = event.target as HTMLElement | null;
-		const toggleBtn = target?.closest('.theme-toggle-btn');
+<script is:inline>
+	document.addEventListener('click', function (event) {
+		var toggleBtn = event.target.closest('.theme-toggle-btn');
 		if (!toggleBtn) return;
 
-		const isDark = document.documentElement.classList.contains('dark');
-		const newTheme = isDark ? 'light' : 'dark';
+		var isDark = document.documentElement.classList.contains('dark');
+		var newTheme = isDark ? 'light' : 'dark';
 
 		document.documentElement.classList.toggle('dark', !isDark);
 		document.documentElement.setAttribute('data-theme', newTheme);
-		localStorage.setItem('theme', newTheme);
+		try {
+			localStorage.setItem('theme', newTheme);
+		} catch (e) {
+			console.warn('LocalStorage access restricted:', e);
+		}
 	});
 </script>
 
