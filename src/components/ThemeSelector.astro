@@ -20,22 +20,44 @@
 	</svg>
 </button>
 
-<script is:inline>
-	document.addEventListener('click', function (event) {
-		var toggleBtn = event.target.closest('.theme-toggle-btn');
-		if (!toggleBtn) return;
+<script>
+	function setupThemeToggle() {
+		const buttons = document.querySelectorAll('.theme-toggle-btn');
+		if (!buttons.length) return;
 
-		var isDark = document.documentElement.classList.contains('dark');
-		var newTheme = isDark ? 'light' : 'dark';
+		buttons.forEach((btn) => {
+			// Replace element to strip old event listeners
+			const newBtn = btn.cloneNode(true);
+			btn.parentNode?.replaceChild(newBtn, btn);
+		});
 
-		document.documentElement.classList.toggle('dark', !isDark);
-		document.documentElement.setAttribute('data-theme', newTheme);
-		try {
-			localStorage.setItem('theme', newTheme);
-		} catch (e) {
-			console.warn('LocalStorage access restricted:', e);
-		}
-	});
+		const activeButtons = document.querySelectorAll('.theme-toggle-btn');
+		activeButtons.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const isDark =
+					document.documentElement.classList.contains('dark') ||
+					document.documentElement.getAttribute('data-theme') === 'dark';
+				const newTheme = isDark ? 'light' : 'dark';
+
+				if (newTheme === 'dark') {
+					document.documentElement.classList.add('dark');
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+
+				try {
+					localStorage.setItem('theme', newTheme);
+				} catch (e) {
+					console.warn('LocalStorage unavailable:', e);
+				}
+			});
+		});
+	}
+
+	setupThemeToggle();
+	document.addEventListener('astro:page-load', setupThemeToggle);
 </script>
 
 <style>
@@ -62,14 +84,20 @@
 		pointer-events: none;
 	}
 
+	/* LIGHT MODE VISIBILITY RULES */
 	.sun-icon { display: none !important; }
 	.moon-icon { display: block !important; }
 
-	:global(html.dark) .theme-toggle-btn {
-		color: var(--text-color);
+	/* DARK MODE VISIBILITY RULES */
+	:global(html.dark) .sun-icon,
+	:global(html[data-theme='dark']) .sun-icon {
+		display: block !important;
 	}
-	:global(html.dark) .sun-icon { display: block !important; }
-	:global(html.dark) .moon-icon { display: none !important; }
+
+	:global(html.dark) .moon-icon,
+	:global(html[data-theme='dark']) .moon-icon {
+		display: none !important;
+	}
 
 	.theme-toggle-btn:hover {
 		background-color: var(--code-bg);
