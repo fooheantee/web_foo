@@ -3,6 +3,7 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import rehypeMermaid from 'rehype-mermaid'; 
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,7 +11,13 @@ export default defineConfig({
   // Explicitly set the output to static generation (SSG)
   output: 'static',
   integrations: [mdx(), sitemap()],
-
+  markdown: {
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid'], // Prevents Shiki from trying to highlight the text
+    },
+    rehypePlugins: [rehypeMermaid], // Processes the block into an SVG
+  },
   fonts: [
       {
           provider: fontProviders.local(),
