@@ -1,79 +1,121 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import ThemeSelector from './ThemeSelector.astro'; 
 ---
 
-<header>
-	<nav>
-		<h2>
+<header class="site-header">
+	<nav class="nav-container">
+		<div class="site-title">
 			<a href="/">{SITE_TITLE}</a>
-		</h2>
+		</div>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 		<div class="social-links">
-
-		<a href='https://www.linkedin.com/in/fooheantee/' target="_blank">
-			<span class="sr-only">Connect with me on LinkedIn</span>
-			<svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32">
-				<path
-					fill="currentColor"
-					d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"
-				></path>
-			</svg>
-		</a>
-		<a href={`mailto:hello@heantee.foo`}>
-			<span class="sr-only">Email me</span>
-			<svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32">
-				<path
-					fill="currentColor"
-					d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-				></path>
-			</svg>
-		</a>
+			<a
+				href="https://www.linkedin.com/in/fooheantee/"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Connect with me on LinkedIn"
+			>
+				<svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="currentColor">
+					<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/>
+				</svg>
+			</a>
+			<a
+				href="mailto:hello@heantee.foo"
+				aria-label="Email me"
+			>
+				<svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20" fill="currentColor">
+					<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+				</svg>
+			</a>
+			<ThemeSelector />
 		</div>
 	</nav>
 </header>
+
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+	.site-header {
+		background-color: var(--background-color);
+		border-bottom: 1px solid var(--border-color);
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
 	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
+	.nav-container {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 0.75rem 1.25rem;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
+
+	.site-title a {
+		font-weight: 700;
+		font-size: 1.125rem;
+		color: var(--text-color);
 		text-decoration: none;
 	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
+
+	.site-title a:hover {
+		color: var(--accent-color);
 	}
-	.social-links,
-	.social-links a {
+
+	.internal-links {
 		display: flex;
+		align-items: center;
+		gap: 1rem;
 	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
+
+	.social-links {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.social-links a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		color: var(--muted-text);
+		border-radius: 6px;
+		text-decoration: none;
+		transition: color 0.15s ease, background-color 0.15s ease;
+	}
+
+	.social-links a:hover {
+		color: var(--accent-color);
+		background-color: var(--code-bg);
+	}
+
+	.social-links a:focus-visible {
+		outline: 2px solid var(--accent-color);
+		outline-offset: 2px;
+	}
+
+	@media (max-width: 640px) {
+		.nav-container {
+			flex-wrap: wrap;
+			gap: 0.75rem;
+			padding: 0.75rem 1rem;
+		}
+
+		.internal-links {
+			order: 3;
+			width: 100%;
+			justify-content: flex-start;
+			gap: 1.25rem;
+			padding-top: 0.5rem;
+			border-top: 1px solid var(--border-color);
 		}
 	}
 </style>

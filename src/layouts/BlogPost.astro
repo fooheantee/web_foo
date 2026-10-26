@@ -5,6 +5,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import MermaidScript from '../components/MermaidScript.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -14,6 +15,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
+		<MermaidScript />
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -27,14 +29,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
-				box-shadow: var(--box-shadow);
 			}
 			.prose {
-				width: 720px;
+				width: 68ch;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
-				color: rgb(var(--gray-dark));
+				color: var(--text-color);
 			}
 			.title {
 				margin-bottom: 1em;
@@ -44,10 +45,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
+				color: var(--text-color);
 			}
 			.date {
 				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				color: var(--muted-text);
 			}
 			.last-updated-on {
 				font-style: italic;

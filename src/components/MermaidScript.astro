@@ -1,0 +1,53 @@
+---
+// src/components/MermaidScript.astro
+---
+
+<script>
+	import mermaid from 'mermaid';
+
+	function renderDiagrams() {
+		const isDark = document.documentElement.classList.contains('dark');
+		
+		mermaid.initialize({
+			startOnLoad: false,
+			theme: isDark ? 'dark' : 'default',
+			securityLevel: 'loose',
+		});
+
+		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre[data-language="mermaid"] code, pre.astro-code code[data-language="mermaid"]');
+
+		codeBlocks.forEach((codeElement, index) => {
+			const preElement = codeElement.closest('pre');
+			if (!preElement || preElement.hasAttribute('data-rendered')) return;
+
+			preElement.setAttribute('data-rendered', 'true');
+			const graphDefinition = codeElement.textContent || '';
+
+			const container = document.createElement('div');
+			container.className = 'mermaid';
+			container.id = `mermaid-diagram-${index}`;
+			container.textContent = graphDefinition;
+
+			preElement.replaceWith(container);
+		});
+
+		mermaid.run({ querySelector: '.mermaid' });
+	}
+
+	document.addEventListener('DOMContentLoaded', renderDiagrams);
+	document.addEventListener('astro:page-load', renderDiagrams);
+	document.addEventListener('astro:after-swap', renderDiagrams);
+</script>
+
+<style is:global>
+	.mermaid {
+		display: flex;
+		justify-content: center;
+		margin: 2rem 0;
+		background-color: var(--code-bg);
+		padding: 1rem;
+		border-radius: 8px;
+		border: 1px solid var(--border-color);
+		overflow-x: auto;
+	}
+</style>

@@ -1,11 +1,109 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout title="Page Not Found">
-  <main style="text-align: center; padding: 4rem 2rem;">
-    <h1>404: Oops! Page Not Found</h1>
-    <p>The link you followed might be broken, or the page may have been moved.</p>
-    <a href="/" style="color: blue; text-decoration: underline;">Return to Home</a>
-  </main>
-</Layout>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`404: Page Not Found | ${SITE_TITLE}`}
+			description="The requested page could not be found."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="not-found-container">
+			<div class="error-code">404</div>
+			<h1>Foo-nally Lost?</h1>
+			<p class="description">
+				Looks like you hit a dead end, or I misconfigured a route in my homelab again. Either way, variable <code>page</code> returned <code>null</code>.
+			</p>
+			<div class="actions">
+				<a href="/" class="btn primary-btn">Return Home</a>
+				<a href="/blog" class="btn secondary-btn">Read Blog</a>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.not-found-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 3rem 1.25rem;
+		min-height: 50vh;
+	}
+
+	.error-code {
+		font-family: var(--font-mono);
+		font-size: 0.875rem;
+		font-weight: 700;
+		color: var(--accent-color);
+		background-color: var(--code-bg);
+		border: 1px solid var(--border-color);
+		padding: 0.25rem 0.75rem;
+		border-radius: 9999px;
+		margin-bottom: 1rem;
+	}
+
+	h1 {
+		font-size: 2.25rem;
+		margin: 0 0 1rem 0;
+		color: var(--text-color);
+	}
+
+	.description {
+		max-width: 48ch;
+		color: var(--muted-text);
+		font-size: 1.125rem;
+		margin-bottom: 2rem;
+		line-height: 1.6;
+	}
+
+	.actions {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.6rem 1.25rem;
+		border-radius: 6px;
+		font-weight: 600;
+		font-size: 1rem;
+		text-decoration: none;
+		transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+	}
+
+	.primary-btn {
+		background-color: var(--accent-color);
+		color: #ffffff;
+	}
+
+	.primary-btn:hover {
+		background-color: var(--accent-hover);
+		color: #ffffff;
+	}
+
+	.secondary-btn {
+		background-color: var(--code-bg);
+		color: var(--text-color);
+		border: 1px solid var(--border-color);
+	}
+
+	.secondary-btn:hover {
+		border-color: var(--accent-color);
+		color: var(--accent-color);
+	}
+</style>

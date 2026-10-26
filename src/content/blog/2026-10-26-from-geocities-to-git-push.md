@@ -3,7 +3,6 @@ title: 'From GeoCities to Git Push'
 description: 'An architectural walkthrough of building a static website using Astro and Cloudflare Workers, featuring automated testing, credential isolation, and clean rollbacks via GitHub Actions'
 pubDate: 'Oct 26 2026'
 slug: "from-geocities-to-git-push"
-[//]: # heroImage: '../../assets/blog-placeholder-.jpg'
 ---
 
 My previous web-development experience dates back to the last millennium: HTML in Notepad, a site on GeoCities, and eventually Macromedia Dreamweaver.
