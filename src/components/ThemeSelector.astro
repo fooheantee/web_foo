@@ -28,11 +28,12 @@
 		const toggleBtn = target.closest('.theme-toggle-btn');
 		if (!toggleBtn) return;
 
-		const isDark = document.documentElement.classList.contains('dark');
-		const newTheme = isDark ? 'light' : 'dark';
+		const isDark = document.documentElement.classList.contains('dark') ||
+			document.documentElement.getAttribute('data-theme') === 'dark';
+		const nextTheme = isDark ? 'light' : 'dark';
 
 		try {
-			localStorage.setItem('theme', newTheme);
+			localStorage.setItem('theme', nextTheme);
 		} catch (e) {
 			console.warn('LocalStorage unavailable:', e);
 		}
@@ -40,8 +41,8 @@
 		if (typeof (window as any).applyTheme === 'function') {
 			(window as any).applyTheme();
 		} else {
-			document.documentElement.classList.toggle('dark', newTheme === 'dark');
-			document.documentElement.setAttribute('data-theme', newTheme);
+			document.documentElement.classList.toggle('dark', nextTheme === 'dark');
+			document.documentElement.setAttribute('data-theme', nextTheme);
 		}
 	});
 </script>
