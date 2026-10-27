@@ -1,21 +1,21 @@
 <script is:inline>
-	function applyTheme() {
-		try {
-			var storedTheme = localStorage.getItem('theme');
-			var theme = storedTheme;
-			if (!theme) {
-				theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			}
-			var isDark = theme === 'dark';
-			document.documentElement.classList.toggle('dark', isDark);
-			document.documentElement.setAttribute('data-theme', theme);
-		} catch (e) {
-			console.warn('Theme initialization error:', e);
-		}
-	}
+    function applyTheme() {
+        try {
+            var storedTheme = localStorage.getItem('theme');
+            var theme = storedTheme;
+            if (!theme) {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            var isDark = theme === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+            document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+            console.warn('LocalStorage error:', e);
+        }
+    }
 
-	window.applyTheme = applyTheme;
-	applyTheme();
-	document.addEventListener('astro:after-swap', applyTheme);
-	document.addEventListener('astro:page-load', applyTheme);
+    window.applyTheme = applyTheme;
+    applyTheme();
+    document.addEventListener('astro:after-swap', applyTheme);
+    document.addEventListener('astro:page-load', applyTheme);
 </script>
