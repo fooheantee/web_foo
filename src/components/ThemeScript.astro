@@ -10,6 +10,8 @@
 		document.documentElement.setAttribute('data-theme', theme);
 	}
 
+	window.applyTheme = applyTheme;
 	applyTheme();
 	document.addEventListener('astro:after-swap', applyTheme);
+	document.addEventListener('astro:page-load', applyTheme);
 </script>

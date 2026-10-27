@@ -21,31 +21,29 @@
 </button>
 
 <script>
-	const bindThemeToggle = () => {
-		const buttons = document.querySelectorAll('.theme-toggle-btn');
-		if (!buttons.length) return;
+	document.addEventListener('click', (event) => {
+		const target = event.target;
+		if (!(target instanceof HTMLElement)) return;
 
-		buttons.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				const isDark = document.documentElement.classList.contains('dark') ||
-					document.documentElement.getAttribute('data-theme') === 'dark';
-				const nextTheme = isDark ? 'light' : 'dark';
+		const toggleBtn = target.closest('.theme-toggle-btn');
+		if (!toggleBtn) return;
 
-				document.documentElement.classList.toggle('dark', !isDark);
-				document.documentElement.setAttribute('data-theme', nextTheme);
+		const isDark = document.documentElement.classList.contains('dark');
+		const newTheme = isDark ? 'light' : 'dark';
 
-				try {
-					localStorage.setItem('theme', nextTheme);
-				} catch (err) {
-					console.warn('LocalStorage unavailable:', err);
-				}
-			});
-		});
-	};
+		try {
+			localStorage.setItem('theme', newTheme);
+		} catch (e) {
+			console.warn('LocalStorage unavailable:', e);
+		}
 
-	// Execute on initial DOM ready and View Transitions
-	bindThemeToggle();
-	document.addEventListener('astro:page-load', bindThemeToggle);
+		if (typeof (window as any).applyTheme === 'function') {
+			(window as any).applyTheme();
+		} else {
+			document.documentElement.classList.toggle('dark', newTheme === 'dark');
+			document.documentElement.setAttribute('data-theme', newTheme);
+		}
+	});
 </script>
 
 <style>
