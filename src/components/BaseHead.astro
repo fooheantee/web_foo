@@ -19,12 +19,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = FallbackImage } = Astro.props;
 ---
 
-<!-- Theme Initialization Script (Must run before rendering page body) -->
-<ThemeScript />
-
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- Theme Initialization Script (Must run before rendering page body) -->
+<ThemeScript />
+
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -36,7 +37,8 @@ const { title, description, image = FallbackImage } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
-<Font cssVariable="--font-atkinson" preload />
+<!-- Font Definition without eager preloading to prevent unused preload warnings -->
+<Font cssVariable="--font-atkinson" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

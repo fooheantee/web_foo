@@ -1,6 +1,6 @@
 ---
 title: 'From GeoCities to Git Push'
-description: 'An architectural walkthrough of building a static website using Astro and Cloudflare Workers, featuring automated testing, credential isolation, and clean rollbacks via GitHub Actions'
+description: 'Astro & Cloudflare Workers architecture: Build a static site with GitHub Actions featuring automated testing, credential isolation, and clean rollbacks.'
 pubDate: 'Oct 26 2026'
 slug: "from-geocities-to-git-push"
 ---
@@ -82,7 +82,7 @@ The diagram summarizes the intended publishing process and the separate visitor 
 
 ```mermaid
 graph TD
-    subgraph This could be you["Local Workstation"]
+    subgraph Local Workstation["Local Workstation"]
         A["Feature Branch"]
     end
 

@@ -1,6 +1,6 @@
 ---
 title: 'Hello, World: Why I Built This Site'
-description: 'Hello, World: Why I Built This Site'
+description: 'HWhy I built a personal website: a homelab detour, a failed home-hosting test, and a free-tier learning project.'
 pubDate: 'Oct 25 2026'
 slug: "first-post-hello"
 [//]: # heroImage: '../../assets/blog-placeholder-.jpg'

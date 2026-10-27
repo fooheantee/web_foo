@@ -15,7 +15,7 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title="Blog | Foo HeanTee" description="Write-ups on identity and access management, security engineering, and homelab experiments by Foo HeanTee." />
 		<style>
 			main {
 				width: 100%;
@@ -88,6 +88,7 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
+			<h1>Blog: identity security and homelab notes</h1>
 			<section>
 				<ul>
 					{posts.map((post) => (
