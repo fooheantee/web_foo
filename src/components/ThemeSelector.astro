@@ -21,30 +21,30 @@
 </button>
 
 <script>
-	document.addEventListener('click', (event) => {
-		const target = event.target;
-		if (!(target instanceof HTMLElement)) return;
+	const setupTheme = () => {
+		const buttons = document.querySelectorAll('.theme-toggle-btn');
+		if (!buttons.length) return;
 
-		const toggleBtn = target.closest('.theme-toggle-btn');
-		if (!toggleBtn) return;
+		buttons.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const isDark = document.documentElement.classList.contains('dark') ||
+					document.documentElement.getAttribute('data-theme') === 'dark';
+				const nextTheme = isDark ? 'light' : 'dark';
 
-		const isDark = document.documentElement.classList.contains('dark') ||
-			document.documentElement.getAttribute('data-theme') === 'dark';
-		const nextTheme = isDark ? 'light' : 'dark';
+				document.documentElement.classList.toggle('dark', !isDark);
+				document.documentElement.setAttribute('data-theme', nextTheme);
 
-		try {
-			localStorage.setItem('theme', nextTheme);
-		} catch (e) {
-			console.warn('LocalStorage unavailable:', e);
-		}
+				try {
+					localStorage.setItem('theme', nextTheme);
+				} catch (e) {
+					console.warn('LocalStorage error:', e);
+				}
+			});
+		});
+	};
 
-		if (typeof (window as any).applyTheme === 'function') {
-			(window as any).applyTheme();
-		} else {
-			document.documentElement.classList.toggle('dark', nextTheme === 'dark');
-			document.documentElement.setAttribute('data-theme', nextTheme);
-		}
-	});
+	setupTheme();
+	document.addEventListener('astro:page-load', setupTheme);
 </script>
 
 <style>
