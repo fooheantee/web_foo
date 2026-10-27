@@ -21,13 +21,14 @@
 </button>
 
 <script>
-	const setupTheme = () => {
+	const setupThemeToggle = () => {
 		const buttons = document.querySelectorAll('.theme-toggle-btn');
 		if (!buttons.length) return;
 
 		buttons.forEach((btn) => {
 			btn.addEventListener('click', () => {
-				const isDark = document.documentElement.classList.contains('dark') ||
+				const isDark =
+					document.documentElement.classList.contains('dark') ||
 					document.documentElement.getAttribute('data-theme') === 'dark';
 				const nextTheme = isDark ? 'light' : 'dark';
 
@@ -37,14 +38,14 @@
 				try {
 					localStorage.setItem('theme', nextTheme);
 				} catch (e) {
-					console.warn('LocalStorage error:', e);
+					console.warn('LocalStorage unavailable:', e);
 				}
 			});
 		});
 	};
 
-	setupTheme();
-	document.addEventListener('astro:page-load', setupTheme);
+	setupThemeToggle();
+	document.addEventListener('astro:page-load', setupThemeToggle);
 </script>
 
 <style>
