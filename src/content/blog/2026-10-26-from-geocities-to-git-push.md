@@ -3,6 +3,21 @@ title: 'From GeoCities to Git Push'
 description: 'Astro & Cloudflare Workers architecture: Build a static site with GitHub Actions featuring automated testing, credential isolation, and clean rollbacks.'
 pubDate: 'Oct 26 2026'
 slug: "from-geocities-to-git-push"
+tags:
+ - Code Hosting
+ - Astro Static pages
+ - Cloudflare Wrangler
+ - Cloudflare Static Assets
+ - GitHub Actions
+ - Dependablot
+
+keywords:
+ - Code Hosting
+ - Astro Static pages
+ - Cloudflare Wrangler
+ - Cloudflare Static Assets
+ - GitHub Actions
+ - Dependablot
 ---
 
 My previous web-development experience dates back to the last millennium: HTML in Notepad, a site on GeoCities, and eventually Macromedia Dreamweaver.
