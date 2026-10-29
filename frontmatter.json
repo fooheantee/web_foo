@@ -1,0 +1,90 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": "src/assets",
+  "frontMatter.content.supportedFileTypes": [
+    "md",
+    "mdx"
+  ],
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "blog",
+      "path": "[[workspace]]/src/content/blog",
+      "contentTypes": [
+        "blog"
+      ]
+    }
+  ],
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "blog",
+      "pageBundle": false,
+      "previewPath": "blog/{slug}",
+      "clearEmpty": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string",
+          "single": true,
+          "required": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string",
+          "required": true
+        },
+        {
+          "title": "Publishing date",
+          "name": "pubDate",
+          "type": "datetime",
+          "default": "{{now}}",
+          "dateFormat": "yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+          "isPublishDate": true,
+          "required": true
+        },
+        {
+          "title": "Updated date",
+          "name": "updatedDate",
+          "type": "datetime",
+          "dateFormat": "yyyy-MM-dd'T'HH:mm:ss.SSSXXX",
+          "isModifiedDate": true
+        },
+        {
+          "title": "Hero image",
+          "name": "heroImage",
+          "type": "image",
+          "isPreviewImage": true
+        },
+        {
+          "title": "Draft",
+          "name": "draft",
+          "type": "draft"
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "tags",
+          "taxonomyLimit": 5,
+          "frontMatter.taxonomy.tags": [
+          "Active Directory",
+          "Astro",
+          "Cloud Security",
+          "Cybersecurity",
+          "Homelab",
+          "Identity Management",
+          "Local AI",
+          "Multi-Factor Authentication",
+          "Privileged Access Management",
+          "Zero Trust",
+          "IAM",
+          "Privileged Access Management",
+          "PAM"
+        ]
+        }
+      ]
+    }
+  ]
+}
