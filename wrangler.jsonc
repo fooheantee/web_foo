@@ -7,8 +7,8 @@
     "not_found_handling": "404-page"
   },
   "routes": [
-    { "pattern": "heantee.foo/*", "custom_domain": true },
-    { "pattern": "www.heantee.foo/*", "custom_domain": true }
+    { "pattern": "heantee.foo", "custom_domain": true },
+    { "pattern": "www.heantee.foo", "custom_domain": true }
   ],
   "observability": {
     "enabled": true
