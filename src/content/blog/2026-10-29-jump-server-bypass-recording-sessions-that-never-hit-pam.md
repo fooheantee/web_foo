@@ -1,6 +1,7 @@
 ---
 title: "Jump Server Bypass: Recording Sessions That Never Hit PAM"
 pubDate: 2026-10-29T11:47:45.747Z
+fmContentType: blog
 description: How to capture video and keystroke session recordings on physical or direct-RDP servers when admins bypass traditional PAM jump gateways.
 slug: "jump-server-bypass"
 tags:

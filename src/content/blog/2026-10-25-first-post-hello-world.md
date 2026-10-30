@@ -1,8 +1,9 @@
 ---
-title: 'Hello, World: Why I Built This Site'
-description: 'Why I built a personal website: a homelab detour, a failed home-hosting test, and a free-tier learning project.'
-pubDate: 'Oct 25 2026'
-slug: "first-post-hello"
+title: "Hello, World: Why I Built This Site"
+description: "Why I built a personal website: a homelab detour, a failed home-hosting test, and a free-tier learning project."
+pubDate: 2026-10-24T16:00:00.000Z
+fmContentType: blog
+slug: first-post-hello
 tags:
     - Home lab
     - Hello World
@@ -15,7 +16,7 @@ keywords:
     - CI/CD
     - Serverless architecture
     - Full-stack serverless applications
-[//]: # heroImage: '../../assets/blog-placeholder-.jpg'
+"[ // ]": null
 ---
 I finally have a personal website. 🎉
 For my first post, I thought I’d share the backstory.

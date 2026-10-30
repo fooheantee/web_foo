@@ -69,20 +69,42 @@
           "type": "tags",
           "taxonomyLimit": 5,
           "frontMatter.taxonomy.tags": [
-          "Active Directory",
-          "Astro",
-          "Cloud Security",
-          "Cybersecurity",
-          "Homelab",
-          "Identity Management",
-          "Local AI",
-          "Multi-Factor Authentication",
-          "Privileged Access Management",
-          "Zero Trust",
-          "IAM",
-          "Privileged Access Management",
-          "PAM"
-        ]
+            "Active Directory",
+            "Astro",
+            "Cloud Security",
+            "Cybersecurity",
+            "Homelab",
+            "Identity Management",
+            "Local AI",
+            "Multi-Factor Authentication",
+            "Privileged Access Management",
+            "Zero Trust",
+            "IAM",
+            "Privileged Access Management",
+            "PAM"
+          ]
+        },
+        {
+          "title": "fmContentType",
+          "name": "fmContentType",
+          "type": "string"
+        },
+        {
+          "title": "keywords",
+          "name": "keywords",
+          "type": "choice",
+          "choices": [
+            "Home lab",
+            "Hello World",
+            "CI/CD",
+            "Serverless architecture",
+            "Full-stack serverless applications"
+          ]
+        },
+        {
+          "title": "[ // ]",
+          "name": "[ // ]",
+          "type": "datetime"
         }
       ]
     }
