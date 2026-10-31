@@ -4,6 +4,7 @@ description: "Astro & Cloudflare Workers architecture: Build a static site with 
 pubDate: 2026-10-25T16:00:00.000Z
 fmContentType: blog
 slug: from-geocities-to-git-push
+draft: false
 tags:
     - Code Hosting
     - Astro Static pages

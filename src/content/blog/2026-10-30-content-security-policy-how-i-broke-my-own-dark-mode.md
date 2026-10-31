@@ -2,6 +2,7 @@
 title: "Content Security Policy: How I Broke My Own Dark Mode"
 description: How CSP blocked my Astro blog’s dark mode, what restored it, and the security trade-offs behind the fix.
 slug: csp-how-i-broke
+draft: false
 tags:
   - cybersecurity
   - application-security
