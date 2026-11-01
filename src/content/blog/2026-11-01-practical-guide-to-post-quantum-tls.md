@@ -102,7 +102,7 @@ New, (NONE), Cipher is (NONE)
 Protocol: TLSv1.3
 ```
 
-![OpenSSL s\_client output showing a handshake failure alert and no peer certificate](/src/assets//openssl-tls13-reject.png)
+![OpenSSL s\_client output showing a handshake failure alert and no peer certificate](../../assets//openssl-tls13-reject.png)
 
 The server sent a TLS alert (number 40, handshake failure) and closed the connection. Other servers use other alerts, such as number 70 (protocol version). Two lines tell the real story: `no peer certificate available` and `New, (NONE), Cipher is (NONE)`. No certificate arrived and no session started. The line `Protocol: TLSv1.3` only shows what the client asked for.
 
@@ -118,7 +118,7 @@ openssl s_client -connect heantee.foo:443 -tls1_2
 ```
 
 
-![Side-by-side OpenSSL output. Left: TLS 1.3 negotiates X25519MLKEM768. Right: TLS 1.2 uses X25519. Both show the same ECDSA signature type.](/src/assets//openssl-tls1213-compare.png)
+![Side-by-side OpenSSL output. Left: TLS 1.3 negotiates X25519MLKEM768. Right: TLS 1.2 uses X25519. Both show the same ECDSA signature type.](../../assets//openssl-tls1213-compare.png)
 
 *Left: TLS 1.3. Right: TLS 1.2. Same server, same certificate.*
 
