@@ -45,6 +45,7 @@
     "cookie": "^1.0.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261101.1",
     "@lhci/cli": "^0.13.0",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.2",
