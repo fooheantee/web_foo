@@ -1,7 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { defineConfig } from 'astro/config';
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
@@ -16,12 +15,11 @@ const blog = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
 			tags: z.array(z.string()).default([]),
-			draft: z.boolean().optional().default(false), // Add draft field here
+			keywords: z.array(z.string()).default([]),
+			draft: z.boolean().optional().default(false),
+			// Category maps directly to SVG icon options
+			category: z.enum(['identity', 'homelab', 'security', 'dev', 'architecture']).default('security'),
 		}),
 });
 
 export const collections = { blog };
-
-export default defineConfig({
-  site: 'https://heantee.foo/',
-});

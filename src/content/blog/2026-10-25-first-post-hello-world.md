@@ -4,6 +4,7 @@ description: "Why I built a personal website: a homelab detour, a failed home-ho
 pubDate: 2026-10-24T16:00:00.000Z
 fmContentType: blog
 slug: first-post-hello
+category: "dev"
 draft: false
 tags:
     - Home lab
@@ -17,7 +18,6 @@ keywords:
     - CI/CD
     - Serverless architecture
     - Full-stack serverless applications
-"[ // ]": null
 ---
 I finally have a personal website. 🎉
 For my first post, I thought I’d share the backstory.

@@ -1,8 +1,8 @@
 ---
-title: One OT Machine, One Certificate, Several Complications
-description: An old Windows machine, a vendor who said 'die die must use IIS Manager', and a wildcard certificate I politely refused to hand over.
+title: "One OT Machine, One Certificate, Several Complications"
+description: "An old Windows machine, a vendor who said 'die die must use IIS Manager', and a wildcard certificate I politely refused to hand over."
 pubDate: 2026-10-31T04:28:31.785Z
-slug: one-machine-one-cert
+category: "identity"
 draft: false
 tags:
   - cybersecurity
@@ -16,7 +16,6 @@ keywords:
   - windows
   - certificates
   - https
-date: 2026-10-31T05:17:49.945Z
 ---
 
 Enabling HTTPS should be routine. Generate a Certificate Signing Request (CSR), get a Certificate Authority (CA) to issue the certificate, install it, bind it, test it. Done before lunch.
