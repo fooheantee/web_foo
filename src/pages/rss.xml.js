@@ -12,24 +12,24 @@ export async function GET(context) {
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: posts.map((post) => {
-			// Resolve post hero image or site fallback for RSS feed reader previews
+			// Option A: Use post heroImage if present, fallback to site favicon SVG
 			const imageUrl = post.data.heroImage
 				? new URL(post.data.heroImage.src, context.site).toString()
 				: new URL('/favicon.svg', context.site).toString();
+
+			const imageType = post.data.heroImage ? 'image/jpeg' : 'image/svg+xml';
 
 			return {
 				title: post.data.title,
 				pubDate: post.data.pubDate,
 				description: post.data.description,
 				link: `/blog/${post.id}/`,
-				// Combine category and tags into standard RSS category tags
 				categories: [post.data.category, ...(post.data.tags || [])],
 				customData: `
-					<enclosure url="${imageUrl}" type="image/svg+xml" length="0" />
+					<enclosure url="${imageUrl}" type="${imageType}" length="0" />
 				`,
 			};
 		}),
-		// Channel-level metadata for feed aggregators (Feedly, Inoreader, NetNewsWire)
 		customData: `
 			<language>en-us</language>
 			<image>
