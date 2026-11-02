@@ -31,12 +31,12 @@ export async function GET(context) {
 			};
 		}),
 		customData: `
-			<language>en-us</language>
-			<image>
-				<url>${new URL('/favicon.svg', context.site)}</url>
-				<title>${SITE_TITLE}</title>
-				<link>${context.site}</link>
-			</image>
+					<language>en-us</language>
+    				<image>
+					<url>${new URL('/favicon.svg', context.site)}</url>
+					<title>${SITE_TITLE}</title>
+					<link>${context.site}</link>
+    				</image>
 		`,
 	});
 }
