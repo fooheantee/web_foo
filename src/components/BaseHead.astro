@@ -3,7 +3,6 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
-import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
 import { Font } from 'astro:assets';
 import ThemeScript from './ThemeScript.astro';
@@ -11,16 +10,27 @@ import ThemeScript from './ThemeScript.astro';
 interface Props {
 	title: string;
 	description: string;
-	image?: ImageMetadata;
+	image?: ImageMetadata | string;
 	ogType?: 'website' | 'article';
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage, ogType = 'website' } = Astro.props;
+const { title, description, image, ogType = 'website' } = Astro.props;
 
-// Always resolve image URL against Astro.site to output an absolute domain URL
-const ogImageURL = new URL(image.src, Astro.site);
+// Determine Open Graph image URL: custom frontmatter image vs site-wide fallback favicon
+let ogImageURL: URL;
+
+if (typeof image === 'object' && image !== null && 'src' in image) {
+	// Custom image object imported via Astro (e.g., heroImage)
+	ogImageURL = new URL(image.src, Astro.site);
+} else if (typeof image === 'string') {
+	// Custom string path passed explicitly
+	ogImageURL = new URL(image, Astro.site);
+} else {
+	// Default site-wide fallback to red seal favicon SVG
+	ogImageURL = new URL('/favicon.svg', Astro.site);
+}
 ---
 
 <!-- Global Metadata -->
