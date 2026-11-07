@@ -26,7 +26,7 @@ if (typeof image === 'object' && image !== null && 'src' in image) {
 	// Custom path passed explicitly
 	ogImageURL = new URL(image, Astro.site);
 } else {
-	// Social scrapers require PNG/JPG (SVG is rejected by Slack/WhatsApp/iMessage)
+	// Fallback to PNG in public folder (make sure filename matches exactly in public/)
 	ogImageURL = new URL('/og-seal.png', Astro.site);
 }
 ---
@@ -38,7 +38,7 @@ if (typeof image === 'object' && image !== null && 'src' in image) {
 <!-- Theme Initialization Script -->
 <ThemeScript />
 
-<!-- Favicons & Icons for Browser Tabs & RSS -->
+<!-- Favicons & Icons -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/og-seal.png" />
@@ -63,17 +63,16 @@ if (typeof image === 'object' && image !== null && 'src' in image) {
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook / Messaging Apps -->
+<meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageURL} />
 <meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="512" />
-<meta property="og:image:height" content="512" />
 
 <!-- Twitter / X -->
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={canonicalURL} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
