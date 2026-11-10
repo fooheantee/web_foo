@@ -1,53 +1,86 @@
----
-// src/components/MermaidScript.astro
----
-
 <script>
-	import mermaid from 'mermaid';
+    const diagramSelector = [
+        'pre code.language-mermaid',
+        'pre[data-language="mermaid"] code',
+        'pre.astro-code code[data-language="mermaid"]',
+    ].join(', ');
 
-	function renderDiagrams() {
-		const isDark = document.documentElement.classList.contains('dark');
-		
-		mermaid.initialize({
-			startOnLoad: false,
-			theme: isDark ? 'dark' : 'default',
-			securityLevel: 'loose',
-		});
+    let renderQueue: Promise<void> = Promise.resolve();
+    let diagramCounter = 0;
 
-		const codeBlocks = document.querySelectorAll('pre code.language-mermaid, pre[data-language="mermaid"] code, pre.astro-code code[data-language="mermaid"]');
+    async function renderDiagrams(): Promise<void> {
+        const codeBlocks = Array.from(
+            document.querySelectorAll<HTMLElement>(diagramSelector),
+        );
 
-		codeBlocks.forEach((codeElement, index) => {
-			const preElement = codeElement.closest('pre');
-			if (!preElement || preElement.hasAttribute('data-rendered')) return;
+        if (codeBlocks.length === 0) return;
 
-			preElement.setAttribute('data-rendered', 'true');
-			const graphDefinition = codeElement.textContent || '';
+        const { default: mermaid } = await import('mermaid');
 
-			const container = document.createElement('div');
-			container.className = 'mermaid';
-			container.id = `mermaid-diagram-${index}`;
-			container.textContent = graphDefinition;
+        // Navigation can replace the document while the import loads.
+        if (!codeBlocks.some((element) => element.isConnected)) return;
 
-			preElement.replaceWith(container);
-		});
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: document.documentElement.classList.contains('dark')
+                ? 'dark'
+                : 'default',
+            securityLevel: 'loose',
+        });
 
-		mermaid.run({ querySelector: '.mermaid' });
-	}
+        for (const codeElement of codeBlocks) {
+            const preElement = codeElement.closest('pre');
 
-	document.addEventListener('DOMContentLoaded', renderDiagrams);
-	document.addEventListener('astro:page-load', renderDiagrams);
-	document.addEventListener('astro:after-swap', renderDiagrams);
+            if (!preElement?.isConnected) continue;
+
+            const container = document.createElement('div');
+            container.className = 'mermaid';
+            container.id = `mermaid-diagram-${diagramCounter++}`;
+            container.textContent = codeElement.textContent ?? '';
+
+            preElement.replaceWith(container);
+
+            try {
+                await mermaid.run({ nodes: [container] });
+            } catch (error) {
+                // Keep the source readable when a diagram cannot render.
+                if (container.isConnected) {
+                    container.replaceWith(preElement);
+                }
+
+                console.error('Failed to render Mermaid diagram:', error);
+            }
+        }
+    }
+
+    function scheduleRendering(): void {
+        renderQueue = renderQueue
+            .then(renderDiagrams)
+            .catch((error: unknown) => {
+                console.error('Failed to load or initialize Mermaid:', error);
+            });
+    }
+
+    document.addEventListener('astro:page-load', scheduleRendering);
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleRendering, {
+            once: true,
+        });
+    } else {
+        scheduleRendering();
+    }
 </script>
 
 <style is:global>
-	.mermaid {
-		display: flex;
-		justify-content: center;
-		margin: 2rem 0;
-		background-color: var(--code-bg);
-		padding: 1rem;
-		border-radius: 8px;
-		border: 1px solid var(--border-color);
-		overflow-x: auto;
-	}
+    .mermaid {
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+        background-color: var(--code-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        overflow-x: auto;
+    }
 </style>
