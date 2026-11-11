@@ -1,195 +1,211 @@
 /* Explicit Dark Theme Body Overrides */
 html.dark body,
 html[data-theme="dark"] body {
-	background-color: #121212 !important;
-	color: #f3f4f6 !important;
+  background-color: #121212 !important;
+  color: #f3f4f6 !important;
 }
 
 /* Universal Box Reset */
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* 1. LIGHT MODE (DEFAULT AND EXPLICIT) */
 :root,
 html.light,
 html[data-theme="light"] {
-	--font-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	--font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
-	--max-width: 68ch;
+  --font-body:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono:
+    ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  --max-width: 68ch;
 
-	--background-color: #ffffff;
-	--text-color: #1a1a1a;
-	--accent-color: #4f46e5;
-	--accent-hover: #4338ca;
-	--muted-text: #6b7280;
-	--border-color: #e5e7eb;
-	--code-bg: #f3f4f6;
+  --background-color: #ffffff;
+  --text-color: #1a1a1a;
+  --accent-color: #4f46e5;
+  --accent-hover: #4338ca;
+  --muted-text: #6b7280;
+  --border-color: #e5e7eb;
+  --code-bg: #f3f4f6;
 }
 
 /* 2. DARK MODE (EXPLICIT CLASS OR DATA ATTRIBUTE) */
 html.dark,
 html[data-theme="dark"] {
-	--background-color: #121212;
-	--text-color: #f3f4f6;
-	--accent-color: #818cf8;
-	--accent-hover: #a5b4fc;
-	--muted-text: #9ca3af;
-	--border-color: #374151;
-	--code-bg: #1f2937;
+  --background-color: #121212;
+  --text-color: #f3f4f6;
+  --accent-color: #818cf8;
+  --accent-hover: #a5b4fc;
+  --muted-text: #9ca3af;
+  --border-color: #374151;
+  --code-bg: #1f2937;
 }
 
 html {
-	color-scheme: light dark;
+  color-scheme: light dark;
 }
 
 body {
-    font-family: var(--font-body);
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color) !important;
-    color: var(--text-color) !important;
-    font-size: 1.125rem;
-    line-height: 1.7;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 main {
-	width: 100%;
-	max-width: var(--max-width);
-	margin: 0 auto;
-	padding: 2.5rem 1.25rem;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
-	margin: 2rem 0 1rem 0;
-	color: var(--text-color);
-	line-height: 1.25;
-	font-weight: 700;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2rem 0 1rem 0;
+  color: var(--text-color);
+  line-height: 1.25;
+  font-weight: 700;
 }
 
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.35rem; }
+h1 {
+  font-size: 2.25rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.35rem;
+}
 
 p {
-	margin: 0 0 1.5rem 0;
+  margin: 0 0 1.5rem 0;
 }
 
 p.muted {
-	color: var(--muted-text);
+  color: var(--muted-text);
 }
 
 /* Links and Buttons */
 a {
-	color: var(--accent-color);
-	text-decoration: underline;
-	text-underline-offset: 3px;
-	transition: color 0.15s ease;
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
 }
 
 a:hover {
-	color: var(--accent-hover);
+  color: var(--accent-hover);
 }
 
 a:focus-visible,
 button:focus-visible {
-	outline: 2px solid var(--accent-color);
-	outline-offset: 3px;
-	border-radius: 2px;
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* Media Elements */
 img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 6px;
-	display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
 }
 
 /* Code Blocks & Shiki Theme Overrides */
 code {
-	font-family: var(--font-mono);
-	font-size: 0.9em;
-	padding: 0.2em 0.4em;
-	background-color: var(--code-bg);
-	border: 1px solid var(--border-color);
-	border-radius: 4px;
-	color: var(--text-color);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
 }
 
 pre {
-	padding: 1rem;
-	border-radius: 6px;
-	background-color: var(--code-bg);
-	border: 1px solid var(--border-color);
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: var(--code-bg);
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 pre > code {
-	all: unset;
-	font-family: var(--font-mono);
-	color: var(--text-color);
+  all: unset;
+  font-family: var(--font-mono);
+  color: var(--text-color);
 }
 
 /* Force Shiki dual themes to switch background and font colors in Dark Mode */
 html.dark .astro-code,
 html[data-theme="dark"] .astro-code {
-	background-color: var(--shiki-dark-bg) !important;
-	color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  color: var(--shiki-dark) !important;
 }
 
 html.dark .astro-code span,
 html[data-theme="dark"] .astro-code span {
-	color: var(--shiki-dark) !important;
+  color: var(--shiki-dark) !important;
 }
 
 /* Mermaid Diagram Containers */
 .mermaid {
-	display: flex;
-	justify-content: center;
-	margin: 2rem 0;
-	background-color: var(--code-bg);
-	padding: 1rem;
-	border-radius: 6px;
-	border: 1px solid var(--border-color);
-	overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  background-color: var(--code-bg);
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
 }
 
 blockquote {
-	border-left: 4px solid var(--accent-color);
-	padding: 0.5rem 0 0.5rem 1rem;
-	margin: 1.5rem 0;
-	color: var(--muted-text);
-	font-style: italic;
+  border-left: 4px solid var(--accent-color);
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin: 1.5rem 0;
+  color: var(--muted-text);
+  font-style: italic;
 }
 
 hr {
-	border: none;
-	border-top: 1px solid var(--border-color);
-	margin: 2rem 0;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
 }
 
 /* Accessibility: Respect Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
-	}
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Text Selection Styling */
 ::selection {
-	background-color: var(--accent-color);
-	color: var(--background-color);
+  background-color: var(--accent-color);
+  color: var(--background-color);
 }

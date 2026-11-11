@@ -68,7 +68,6 @@ Imagine someone manages to inject malicious JavaScript into your website. A prop
 
 CSP is an additional layer of defence against attacks such as Cross-Site Scripting (XSS). It does not replace secure coding or fix the underlying vulnerability, but it can reduce the impact of certain attacks.
 
-
 ## The Change That Restored Dark Mode
 
 I needed to adjust the policy so that the required scripts could execute.
@@ -81,11 +80,11 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; 
 
 Let's break it down.
 
-| Directive | What it does |
-|---|---|
-| `default-src 'self'` | Allows resources from the website's own origin by default when a more specific fetch directive is not defined. |
-| `script-src 'self' 'unsafe-inline'` | Allows scripts from the same origin and inline JavaScript. |
-| `style-src 'self' 'unsafe-inline'` | Allows stylesheets from the same origin and inline CSS. |
+| Directive                           | What it does                                                                                                   |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `default-src 'self'`                | Allows resources from the website's own origin by default when a more specific fetch directive is not defined. |
+| `script-src 'self' 'unsafe-inline'` | Allows scripts from the same origin and inline JavaScript.                                                     |
+| `style-src 'self' 'unsafe-inline'`  | Allows stylesheets from the same origin and inline CSS.                                                        |
 
 Adding 'unsafe-inline' to script-src restored the toggle.
 

@@ -3,21 +3,22 @@ title: Do You Still Need a Public IP Address to Self-Host at Home?
 description: Static IP, DDNS, CGNAT or Cloudflare Tunnel? Explore how home hosting has evolved and why exposing your home network may no longer be necessary.
 pubDate: 2026-11-08
 tags:
-    - Homelab
-    - Networking
-    - Cybersecurity
-    - Cloudflare
-    - Self-Hosting
+  - Homelab
+  - Networking
+  - Cybersecurity
+  - Cloudflare
+  - Self-Hosting
 keywords:
-    - Homelab
-    - Networking
-    - Cybersecurity
-    - Cloudflare
-    - Self-Hosting
+  - Homelab
+  - Networking
+  - Cybersecurity
+  - Cloudflare
+  - Self-Hosting
 date: 2026-11-07T15:57:20.547Z
 slug: do-you-need-public-ip-address
-category: "security"
+category: "homelab"
 draft: false
+fmContentType: blog
 ---
 
 # Do You Still Need a Public IP Address to Self-Host at Home?
@@ -65,7 +66,7 @@ flowchart TD
 
 ### The security trade-off
 
-A static public IP keeps the address consistent. Firewall rules and exposed services determine what visitors can actually reach. 
+A static public IP keeps the address consistent. Firewall rules and exposed services determine what visitors can actually reach.
 
 A reachable service can attract automated scanning, even if the website has very few visitors.
 
@@ -117,7 +118,6 @@ You can configure port forwarding on your home router, but you normally cannot c
 
 DDNS cannot fix this. It updates your domain to point at the shared public IP, but inbound traffic gets stuck at the ISP's front door.
 
-
 ### What about IPv6?
 
 If your ISP provides globally routable IPv6, you can host over IPv6 without relying on its IPv4 CGNAT gateway.
@@ -145,7 +145,6 @@ flowchart TD
 This diagram assumes that cloudflared and the web server share the same network namespace, such as running directly inside one VM.
 Separate containers normally need container-network addressing rather than 127.0.0.1.
 
-	
 ### How it works
 
 1. **Visitor to Cloudflare:** The visitor connects to your public hostname using HTTPS.
@@ -155,6 +154,7 @@ Separate containers normally need container-network addressing rather than 127.0
 The local connection does not automatically use HTTPS. You can configure HTTPS if your application requires it.
 
 ### Why I considered it
+
 - **No Inbound Port Forwarding:** I do not need to forward ports 80 or 443 on my router.
 - **Works Behind CGNAT and Dynamic IPs:** The tunnel does not require a directly reachable or fixed home IP address.
 - **Hides Origin IP:** Public DNS records point to Cloudflare rather than publishing my home IP.
@@ -163,6 +163,7 @@ The local connection does not automatically use HTTPS. You can configure HTTPS i
 It still depends on my home power, internet connection, and home lab server. An outage can make the application unavailable until connectivity returns.
 
 ### The Caveat
+
 Cloudflare Tunnel secures the transit path, but it does not fix vulnerabilities inside your application. Access policies can restrict who reaches a private application. They do not replace application updates or secure configuration.
 
 ## The Shift: Public Hosting vs. Private Remote Access
@@ -185,7 +186,6 @@ Tailscale, built on WireGuard, is one option for this private overlay network. I
 
 Don't worry, I will cover Tailscale and my configuration in a separate post.
 
-
 ## Baseline Security: Hardening Your Home Network
 
 Whether you host a public web demo via Cloudflare Tunnel or manage private containers via Tailscale, these baseline rules reduce common risks:
@@ -202,7 +202,6 @@ Whether you host a public web demo via Cloudflare Tunnel or manage private conta
 - [ ] Restrict Admin UI Access: Keep hypervisors (Proxmox, ESXi) and storage portals (NAS) strictly inside a private VPN overlay like Tailscale.
 - [ ] Enforce Authentication: Place public-facing tunnels behind Cloudflare Access or identity-based access policies. Apply this to private services, not necessarily the public website.
 - [ ] Automate Backups: Keep isolated, offsite backups of your homelab configurations and data.
-
 
 ## Conclusion: Expose Only What Is Necessary
 

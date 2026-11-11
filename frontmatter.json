@@ -3,17 +3,12 @@
   "frontMatter.framework.id": "astro",
   "frontMatter.preview.host": "http://localhost:4321",
   "frontMatter.content.publicFolder": "src/assets",
-  "frontMatter.content.supportedFileTypes": [
-    "md",
-    "mdx"
-  ],
+  "frontMatter.content.supportedFileTypes": ["md", "mdx"],
   "frontMatter.content.pageFolders": [
     {
       "title": "blog",
       "path": "[[workspace]]/src/content/blog",
-      "contentTypes": [
-        "blog"
-      ]
+      "contentTypes": ["blog"]
     }
   ],
   "frontMatter.taxonomy.contentTypes": [

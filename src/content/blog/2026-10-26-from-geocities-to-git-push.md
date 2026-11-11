@@ -7,19 +7,19 @@ slug: from-geocities-to-git-push
 category: "architecture"
 draft: false
 tags:
-    - Code Hosting
-    - Astro Static pages
-    - Cloudflare Wrangler
-    - Cloudflare Static Assets
-    - GitHub Actions
-    - Dependablot
+  - Code Hosting
+  - Astro Static pages
+  - Cloudflare Wrangler
+  - Cloudflare Static Assets
+  - GitHub Actions
+  - Dependablot
 keywords:
-    - Code Hosting
-    - Astro Static pages
-    - Cloudflare Wrangler
-    - Cloudflare Static Assets
-    - GitHub Actions
-    - Dependablot
+  - Code Hosting
+  - Astro Static pages
+  - Cloudflare Wrangler
+  - Cloudflare Static Assets
+  - GitHub Actions
+  - Dependablot
 ---
 
 My previous web-development experience dates back to the last millennium: HTML in Notepad, a site on GeoCities, and eventually Macromedia Dreamweaver.
@@ -37,7 +37,9 @@ This post explains the setup I chose, what I am trying to automate, and what sti
 A quick note: I relied heavily on Google, AI assistants and r/webdev for explanations and troubleshooting. This is a learning project, and the setup will change as I understand the tools better. I have separated completed work from checks and tests that are still planned.
 
  
+
 ## 1. What I Wanted to Build 
+
 Before choosing the tools, I set a few core goals:
 
 - **Keep the site lightweight**
@@ -52,21 +54,23 @@ Before choosing the tools, I set a few core goals:
 
 The guiding principle was **simplicity**: a small website with a publishing process I could understand. 
   
-## 2. The Tools and Their Roles 
-I selected the following tools for the project: 
-| Component | Tool | Purpose | Reality |
-| :--- | :--- | :--- | :--- |
-| **Version control** | Git | Track source changes | A record of what I changed before it broke |
-| **Code hosting** | GitHub | Store the repository and manage pull requests | Where my code lives and Dependabot nags me |
-| **Development runtime** | Node.js | Run development tools and the build process | Having fun fixing npm vulnerabilities for Lighthouse CI :) |
-| **Website framework** | Astro | Generate static pages | A good fit for the content-focused site I wanted |
-| **Editor** | VS Code | Edit code and content | Yeah, I finally upgraded from Notepad |
-| **Formatting** | Prettier | Keep formatting consistent | A pretty code formatter |
-| **Deployment tooling** | Wrangler | Upload the generated site and manage deployment | Another tool I had to learn before publishing |
-| **Hosting** | Cloudflare Workers Static Assets | Serve the published files | Was considering Pages but I am good boy and listen to Cloudflare recommendation |
-| **Automation** | GitHub Actions | Run checks and deployment jobs | Single source of truth to test, build, and run `wrangler deploy` |
-| **Dependency updates** | Dependabot | Propose dependency updates through pull req | Hopefully I don’t break it again |
 
+## 2. The Tools and Their Roles 
+
+I selected the following tools for the project: 
+
+| Component               | Tool                             | Purpose                                         | Reality                                                                         |
+| :---------------------- | :------------------------------- | :---------------------------------------------- | :------------------------------------------------------------------------------ |
+| **Version control**     | Git                              | Track source changes                            | A record of what I changed before it broke                                      |
+| **Code hosting**        | GitHub                           | Store the repository and manage pull requests   | Where my code lives and Dependabot nags me                                      |
+| **Development runtime** | Node.js                          | Run development tools and the build process     | Having fun fixing npm vulnerabilities for Lighthouse CI :)                      |
+| **Website framework**   | Astro                            | Generate static pages                           | A good fit for the content-focused site I wanted                                |
+| **Editor**              | VS Code                          | Edit code and content                           | Yeah, I finally upgraded from Notepad                                           |
+| **Formatting**          | Prettier                         | Keep formatting consistent                      | A pretty code formatter                                                         |
+| **Deployment tooling**  | Wrangler                         | Upload the generated site and manage deployment | Another tool I had to learn before publishing                                   |
+| **Hosting**             | Cloudflare Workers Static Assets | Serve the published files                       | Was considering Pages but I am good boy and listen to Cloudflare recommendation |
+| **Automation**          | GitHub Actions                   | Run checks and deployment jobs                  | Single source of truth to test, build, and run `wrangler deploy`                |
+| **Dependency updates**  | Dependabot                       | Propose dependency updates through pull req     | Hopefully I don’t break it again                                                |
 
 I chose Astro because the website is primarily about content. Static generation allows the pages to be created during the build process rather than generated separately for every visitor.
 
@@ -78,9 +82,12 @@ I wanted a few useful safeguards, not a security checklist I did not understand.
 
 Most of these tools were new to me, so I added them one at a time rather than trying to configure everything at once.
   
+
 ## 3. How a Change Reaches the Live Site 
+
   
 The intended workflow separates four activities:  
+
 1. Develop the website locally. 
 2. Validate proposed changes. 
 3. Publish an accepted change. 
@@ -93,9 +100,9 @@ Once the required checks pass, I review the changes and merge the pull request i
 A merge to the main branch triggers the production workflow. The intended configuration allows deployment only after the required production checks succeed. 
 
 ## Workflow Diagram 
-  
-The diagram summarizes the intended publishing process and the separate visitor request path. 
 
+  
+The diagram summarizes the intended publishing process and the separate visitor request path.
 
 ```mermaid
 graph TD
@@ -136,7 +143,9 @@ graph TD
     L -->|HTTPS request| K
     J -->|Deliver static files| L
 ```
+
   
+
 ## 4. Local Setup and Website Configuration
 
 I installed the local tools, created the Astro project, and checked that it ran on my computer. Then I recorded the Node.js version, reviewed the ignore rules, and pushed the starting point to GitHub.
@@ -151,26 +160,31 @@ The supporting checklist includes a sitemap, RSS feed, custom 404 page, `robots.
 
 My approach is to verify a manual deployment before relying on automation. That helps separate website and hosting problems from problems in the workflow.  
   
+
 ## 5. Automated Checks and Deployment Controls 
+
 One of the main goals was to avoid relying entirely on manual checks before publication.  
 
 I initially considered using both GitHub Actions and Cloudflare Workers Builds. I am now simplifying the plan: GitHub Actions will run the checks, build the site, and deploy it with wrangler deploy.
 
 That gives me one place to manage validation and publishing. The change is still on my to-do list.
   
+
 ### Validate proposed changes 
+
   
 My intended checks cover the following areas: 
   
-| Check | Purpose |
-|---|---|
-| Formatting | Catches weird indentation or missing semicolons using Prettier |
-| Astro checks | Identify supported code and framework issues |
-| Production build | Verifies that static HTML compiles cleanly without errors |
-| Link checking | Ensures I haven't linked to dead internal pages |
-| Secret scanning | Detect potential credentials in the scanned files or changes |
-| Dependency auditing | Scans npm packages for known security vulnerabilities |
- 
+
+| Check               | Purpose                                                        |
+| ------------------- | -------------------------------------------------------------- |
+| Formatting          | Catches weird indentation or missing semicolons using Prettier |
+| Astro checks        | Identify supported code and framework issues                   |
+| Production build    | Verifies that static HTML compiles cleanly without errors      |
+| Link checking       | Ensures I haven't linked to dead internal pages                |
+| Secret scanning     | Detect potential credentials in the scanned files or changes   |
+| Dependency auditing | Scans npm packages for known security vulnerabilities          |
+|                     |
 
 These checks answer different questions. A successful build does not prove that every link works, every page looks right, or the website has no security issues.
 
@@ -178,6 +192,7 @@ Their usefulness also depends on how they are configured. A link checker only ch
 
 I still need to review the content, inspect the generated website, and understand what each check actually covers. 
   
+
 ### Control what reaches production 
 
 Where supported by the repository’s GitHub plan and settings, branch protection can require selected checks to pass before a pull request is merged. 
@@ -196,12 +211,14 @@ Hardcoding API keys into a public repo is a mistake you only make once. Storing 
 
 Workflow code still requires careful review. A job that receives a secret can potentially misuse it, so secret storage is not a substitute for controlling which code runs with deployment access. 
   
+
 ### Review dependency updates 
 
 Dependabot can propose dependency updates through pull requests. My intended process sends those updates through the same relevant checks and review as other changes. 
 
 An automated update proposal is a starting point for review, not proof that an update is safe or compatible. 
   
+
 ## 6. Testing Failures and Recovery 
 
 My test plan is to break something small on purpose: remove a required article field, confirm validation fails, fix it, and check that publication works.
@@ -210,7 +227,9 @@ Then I want to publish a harmless change and revert it through another pull requ
 
 I would rather practise recovery while I still know exactly what I broke.
   
+
 ## 7. What I’m Learning
+
 The most useful part has been understanding how the pieces connect. Editing a page, building it, checking a change, and publishing it are separate jobs.
 
 I do not need every tool available. I need a setup I can explain, maintain, and recover when I make a mistake.

@@ -3,15 +3,15 @@ title: "Post-Quantum TLS: You Don't Need New Certificates to Start"
 description: A TLS handshake does two separate jobs. Post-quantum protection for key exchange can start now, with the certificates you already have.
 pubDate: 2026-11-01
 tags:
-    - pqc
-    - tls
-    - pki
-    - security
+  - pqc
+  - tls
+  - pki
+  - security
 keywords:
-    - pqc
-    - tls
-    - pki
-    - security
+  - pqc
+  - tls
+  - pki
+  - security
 date: 2026-11-01T03:40:16.677Z
 slug: post-quantum-tls-don-certificates-start
 category: "identity"
@@ -24,7 +24,7 @@ Replacing your public TLS (Transport Layer Security) certificate isn't a prerequ
 
 In reality, every TLS handshake does two separate security jobs: establishing session keys and authenticating the server. Each one migrates on its own path. Once you split them apart, the migration gets much simpler.
 
-*This information is correct as of 1 November 2026. PQC for TLS is still actively developing, so future updates might supersede this post. I will update this article as standards evolve.*
+_This information is correct as of 1 November 2026. PQC for TLS is still actively developing, so future updates might supersede this post. I will update this article as standards evolve._
 
 **The short version**
 
@@ -37,7 +37,7 @@ In reality, every TLS handshake does two separate security jobs: establishing se
 
 Think of a TLS handshake (the opening exchange of the protocol behind HTTPS in your browser) as two tracks running side by side:
 
-1. **Session key establishment (key exchange).** This creates the short-lived secret keys that encrypt the actual data moving back and forth. Traditionally, we use Elliptic-Curve Diffie-Hellman (ECDH) algorithms like X25519. For post-quantum key exchange, NIST standardized the Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM) in FIPS 203.  
+1. **Session key establishment (key exchange).** This creates the short-lived secret keys that encrypt the actual data moving back and forth. Traditionally, we use Elliptic-Curve Diffie-Hellman (ECDH) algorithms like X25519. For post-quantum key exchange, NIST standardized the Module-Lattice-Based Key-Encapsulation Mechanism (ML-KEM) in FIPS 203.
 2. **Server authentication (signatures).** This proves the server controls the private key behind its digital certificate. A Certificate Authority (CA) vouches that the key belongs to your domain name, so an attacker cannot impersonate the site. Traditionally, this uses RSA or ECDSA signatures in an X.509 certificate. For post-quantum signatures, NIST standardized the Module-Lattice-Based Digital Signature Algorithm (ML-DSA) in FIPS 204.
 
 ```mermaid
@@ -50,8 +50,6 @@ graph TD
     F --> G[PQ signatures later]
 ```
 
-
-
 Why does this distinction matter for your engineering roadmap? Because the threat models for the two tracks are fundamentally different.
 
 Key exchange is vulnerable to "Harvest Now, Decrypt Later" (HNDL). An attacker can record your encrypted traffic today and hold onto it until a quantum computer can break the key exchange years down the road.
@@ -60,7 +58,7 @@ Server authentication happens in real time during the active handshake. Recordin
 
 That doesn't mean authentication can wait forever. Updating certificates, CAs, and root trust stores can take years, so it carries a long lead time. It simply runs on a different clock.
 
-> **A note on the word "hybrid."** It shows up in two places, and they're different things. A *hybrid key exchange* (like X25519MLKEM768) combines a classical and a post-quantum key exchange. That's what you can deploy now. A *PQ/T hybrid certificate* is the term RFC 9794 (an informational IETF document) uses for a certificate that holds both traditional and post-quantum public keys. That belongs to the authentication track and a later phase, and it's optional: DigiCert, for one, recommends ML-DSA-only certificates as the default. A certificate with a single post-quantum key is simply a *post-quantum certificate*, or informally a "PQC certificate."
+> **A note on the word "hybrid."** It shows up in two places, and they're different things. A _hybrid key exchange_ (like X25519MLKEM768) combines a classical and a post-quantum key exchange. That's what you can deploy now. A _PQ/T hybrid certificate_ is the term RFC 9794 (an informational IETF document) uses for a certificate that holds both traditional and post-quantum public keys. That belongs to the authentication track and a later phase, and it's optional: DigiCert, for one, recommends ML-DSA-only certificates as the default. A certificate with a single post-quantum key is simply a _post-quantum certificate_, or informally a "PQC certificate."
 
 ## Your migration roadmap in four phases
 
@@ -76,7 +74,7 @@ One practical caveat: the hybrid client key share is 1,216 bytes instead of 32, 
 
 **Phase 4: Future PQ state (PQ authentication).** Transition server authentication only when the public CA/Browser Forum ecosystem and browser root trust stores fully support it. Two details to keep in mind:
 
-- DigiCert states that the CA/Browser Forum Baseline Requirements do not permit post-quantum algorithms in publicly trusted certificates today. You can, however, test ML-DSA certificates in a private PKI now.  
+- DigiCert states that the CA/Browser Forum Baseline Requirements do not permit post-quantum algorithms in publicly trusted certificates today. You can, however, test ML-DSA certificates in a private PKI now.
 - ML-DSA is the front-runner, but the final public design isn't settled. According to DigiCert, Chrome has named Merkle Tree Certificates (MTCs) as its preferred direction. So Public PQC authentication may end up as something other than plain ML-DSA certificates.
 
 ## Lesson from OpenSSL
@@ -118,10 +116,9 @@ openssl s_client -connect heantee.foo:443 -tls1_3
 openssl s_client -connect heantee.foo:443 -tls1_2
 ```
 
-
 ![Side-by-side OpenSSL output. Left: TLS 1.3 negotiates X25519MLKEM768. Right: TLS 1.2 uses X25519. Both show the same ECDSA signature type.](../../assets//openssl-tls1213-compare.png)
 
-*Left: TLS 1.3. Right: TLS 1.2. Same server, same certificate.*
+_Left: TLS 1.3. Right: TLS 1.2. Same server, same certificate._
 
 On TLS 1.3, look for `Negotiated TLS1.3 group: X25519MLKEM768`. On TLS 1.2, the matching line is `Peer Temp Key: X25519, 253 bits`. Now look at `Peer signature type: ecdsa_secp256r1_sha256`. It's identical on both sides. The key exchange changed, and the authentication didn't. That's the whole post in one screenshot.
 
@@ -131,19 +128,19 @@ You'll also see `Verification error: unable to get local issuer certificate` in 
 
 You don't need to wait for public PQC certificates to start securing your data against future quantum threats.
 
-1. **Audit your endpoints:** Check load balancers, proxies, and security appliances for full TLS 1.3 support.  
-2. **Engage vendors:** Upgrade your TLS stack and ask vendors of managed products for their ML-KEM support roadmaps.  
-3. **Pilot early:** Enable `X25519MLKEM768` on a low-risk service first to measure handshake latency and error rates.  
-4. **Validate middleboxes:** Test firewalls and TLS inspection appliances for handling larger ClientHello packets before widening the rollout.  
+1. **Audit your endpoints:** Check load balancers, proxies, and security appliances for full TLS 1.3 support.
+2. **Engage vendors:** Upgrade your TLS stack and ask vendors of managed products for their ML-KEM support roadmaps.
+3. **Pilot early:** Enable `X25519MLKEM768` on a low-risk service first to measure handshake latency and error rates.
+4. **Validate middleboxes:** Test firewalls and TLS inspection appliances for handling larger ClientHello packets before widening the rollout.
 5. **Experiment in private:** Test PQ certificates in a private PKI while keeping an eye on CA/Browser Forum developments.
 
 Which of your internal systems will be the first you test with hybrid key exchange?
 
 ## Sources
 
-- DigiCert, "Recommendations for post-quantum TLS migration" (August 2026): [https\://www\.digicert.com/articles/pqc/recommendations-for-post-quantum-tls-migration](https://www.digicert.com/articles/pqc/recommendations-for-post-quantum-tls-migration)  
-- IETF Internet-Draft, "Post-quantum hybrid ECDHE-MLKEM Key Agreement for TLSv1.3" (work in progress): [https\://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/](https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/)  
-- NIST FIPS 203 (ML-KEM): [https\://csrc.nist.gov/pubs/fips/203/final](https://csrc.nist.gov/pubs/fips/203/final)  
-- NIST FIPS 204 (ML-DSA): [https\://csrc.nist.gov/pubs/fips/204/final](https://csrc.nist.gov/pubs/fips/204/final)  
-- IETF RFC 9794, "Terminology for Post-Quantum Traditional Hybrid Schemes": [https\://datatracker.ietf.org/doc/html/rfc9794](https://datatracker.ietf.org/doc/html/rfc9794)  
+- DigiCert, "Recommendations for post-quantum TLS migration" (August 2026): [https\://www\.digicert.com/articles/pqc/recommendations-for-post-quantum-tls-migration](https://www.digicert.com/articles/pqc/recommendations-for-post-quantum-tls-migration)
+- IETF Internet-Draft, "Post-quantum hybrid ECDHE-MLKEM Key Agreement for TLSv1.3" (work in progress): [https\://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/](https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/)
+- NIST FIPS 203 (ML-KEM): [https\://csrc.nist.gov/pubs/fips/203/final](https://csrc.nist.gov/pubs/fips/203/final)
+- NIST FIPS 204 (ML-DSA): [https\://csrc.nist.gov/pubs/fips/204/final](https://csrc.nist.gov/pubs/fips/204/final)
+- IETF RFC 9794, "Terminology for Post-Quantum Traditional Hybrid Schemes": [https\://datatracker.ietf.org/doc/html/rfc9794](https://datatracker.ietf.org/doc/html/rfc9794)
 - badssl.com (public TLS test endpoints): [https\://badssl.com/](https://badssl.com/)

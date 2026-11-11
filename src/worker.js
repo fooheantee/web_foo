@@ -1,7 +1,7 @@
 export default {
   async fetch(request, env, _ctx) {
     const response = await env.ASSETS.fetch(request);
-    
+
     const contentType = response.headers.get("content-type") || "";
     if (!contentType.includes("text/html")) {
       return response;

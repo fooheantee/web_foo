@@ -31,25 +31,25 @@ Recently, I had to enable HTTPS on an older Windows machine in an operational te
 
 That last one became the problem.
 
-*(Names, hostnames and environment details in this post are changed or generalised.)*
+_(Names, hostnames and environment details in this post are changed or generalised.)_
 
 ## The shortlist kept getting shorter
 
 There are several ways to create a CSR on Windows. These were my options:
 
-| Method | Tool | Interface | Result for This Machine |
-| :--- | :--- | :--- | :--- |
-| **1** | MMC Certificates snap-in | Windows GUI | Not accepted for this workflow |
-| **2** | DigiCert Certificate Utility | Third-party GUI | Blocked: no third-party software |
-| **3** | IIS Manager | Windows Server GUI | Vendor's choice, but the wizard had a SAN limitation |
-| **4** | OpenSSL | Cross-platform CLI | Blocked: no third-party software |
-| **5** | `certreq` with a custom INF file | Native Windows CLI | Selected |
+| Method | Tool                             | Interface          | Result for This Machine                              |
+| :----- | :------------------------------- | :----------------- | :--------------------------------------------------- |
+| **1**  | MMC Certificates snap-in         | Windows GUI        | Not accepted for this workflow                       |
+| **2**  | DigiCert Certificate Utility     | Third-party GUI    | Blocked: no third-party software                     |
+| **3**  | IIS Manager                      | Windows Server GUI | Vendor's choice, but the wizard had a SAN limitation |
+| **4**  | OpenSSL                          | Cross-platform CLI | Blocked: no third-party software                     |
+| **5**  | `certreq` with a custom INF file | Native Windows CLI | Selected                                             |
 
 I normally prefer to generate the private key on the target machine and keep it there. No exporting, no copying keys around, unless there is a clear reason.
 
 ## The missing SAN field
 
-Here is why Method 3 did not work. Modern clients check the hostname against the Subject Alternative Name (SAN) extension in the certificate, not the old Common Name (RFC 9525 covers this). The *Create Certificate Request* wizard in IIS manager had no field for SAN entries.
+Here is why Method 3 did not work. Modern clients check the hostname against the Subject Alternative Name (SAN) extension in the certificate, not the old Common Name (RFC 9525 covers this). The _Create Certificate Request_ wizard in IIS manager had no field for SAN entries.
 
 To be fair, this is a limit of the wizard and version this particular OT machine had, not a claim that every IIS workflow lacks SAN support.
 
@@ -67,11 +67,11 @@ I politely declined and stuck to my rule: **one node, one certificate, one uniqu
 
 The trade-off, in short:
 
-| | Shared wildcard | Individual certificate |
-| :--- | :--- | :--- |
-| **Blast radius** | Every name the wildcard covers | Only that node's names |
-| **Key handling** | Same key copied to many hosts | Key generated and kept on the node |
-| **Renewal and revocation** | Affects every system using it | Handled per node |
+|                            | Shared wildcard                | Individual certificate             |
+| :------------------------- | :----------------------------- | :--------------------------------- |
+| **Blast radius**           | Every name the wildcard covers | Only that node's names             |
+| **Key handling**           | Same key copied to many hosts  | Key generated and kept on the node |
+| **Renewal and revocation** | Affects every system using it  | Handled per node                   |
 
 ## Back to basics: Windows already had the tool
 
@@ -128,7 +128,6 @@ A few honest caveats:
 ## The ending
 
 Helped the vendor with the CSR generation, got the certificate issued, installed it with `certreq -accept`, and configured the HTTPS binding. HTTPS worked, with the vendor's application on the same old machine, no third-party software and no shared wildcard key.
-
 
 One small reminder: a successful install does not prove the application is using the right certificate. Test with the hostname that is in the SAN.
 

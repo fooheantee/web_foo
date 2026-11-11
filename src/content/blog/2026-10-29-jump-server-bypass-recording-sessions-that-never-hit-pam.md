@@ -7,17 +7,17 @@ slug: "jump-server-bypass"
 category: "identity"
 draft: false
 tags:
-    - Cybersecurity
-    - Delinea
-    - PAM
-    - Privileged Access Management
-    - IAM
+  - Cybersecurity
+  - Delinea
+  - PAM
+  - Privileged Access Management
+  - IAM
 keywords:
-    - Cybersecurity
-    - Delinea
-    - IAM
-    - Privileged Access Management
-    - PAM
+  - Cybersecurity
+  - Delinea
+  - IAM
+  - Privileged Access Management
+  - PAM
 ---
 
 Here's an interesting PAM challenge that sent me down a rabbit hole a couple of years ago.
@@ -48,4 +48,5 @@ Have you seen this gap?
 Has anyone else had to tackle the "direct physical access" or "Jump Server Bypass" loophole in their PAM deployments? What did you use?
 
 ## Check out how it work here:
+
 [Installing the Advanced Session-Recording Agent](https://docs.delinea.com/online-help/secret-server/session-recording/installing-the-asra/index.htm)
