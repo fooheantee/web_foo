@@ -2,7 +2,7 @@
 title: How I Use Tailscale to Reach Proxmox Without Open Ports
 description: A look at my private remote-access setup using an unprivileged Debian LXC subnet router, Home Assistant, and HTTPS.
 pubDate: 2026-11-11T06:29:43.887Z
-draft: true
+draft: false
 fmContentType: blog
 slug: how-i-use-tailscale-to-access-my-proxmox-homelab-without-opening-ports
 category: homelab
