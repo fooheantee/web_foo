@@ -26,9 +26,23 @@
           "required": true
         },
         {
+          "title": "Slug",
+          "name": "slug",
+          "type": "slug",
+          "editable": true
+        },
+        {
           "title": "Description",
           "name": "description",
           "type": "string",
+          "required": true
+        },
+        {
+          "title": "Category",
+          "name": "category",
+          "type": "choice",
+          "choices": ["identity", "homelab", "security", "dev", "architecture"],
+          "default": "security",
           "required": true
         },
         {
@@ -75,31 +89,20 @@
             "Privileged Access Management",
             "Zero Trust",
             "IAM",
-            "Privileged Access Management",
             "PAM"
           ]
         },
         {
           "title": "fmContentType",
           "name": "fmContentType",
-          "type": "string"
+          "type": "string",
+          "default": "blog",
+          "hidden": true
         },
         {
-          "title": "keywords",
+          "title": "Keywords",
           "name": "keywords",
-          "type": "choice",
-          "choices": [
-            "Home lab",
-            "Hello World",
-            "CI/CD",
-            "Serverless architecture",
-            "Full-stack serverless applications"
-          ]
-        },
-        {
-          "title": "[ // ]",
-          "name": "[ // ]",
-          "type": "datetime"
+          "type": "tags"
         }
       ]
     }
