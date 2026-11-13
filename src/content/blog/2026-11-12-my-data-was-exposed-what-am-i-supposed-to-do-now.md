@@ -30,7 +30,7 @@ But after reading them, I was left wondering: What exactly was exposed?
 What should I actually do? And how can I reduce the risk of this
 happening again?
 
-The short answer is that you cannot stop companies from getting breached, so your response needs to match the specific type of data leaked—and shift toward limiting what you share in the first place.
+The short answer is that you cannot stop companies from getting breached, so your response needs to match the specific type of data leaked, and shift toward limiting what you share in the first place.
 
 I am certainly not alone. Recent reports have described data breaches
 involving organisations such as M1, Doctor Anywhere, Fullerton Health
