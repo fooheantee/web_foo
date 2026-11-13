@@ -1,20 +1,21 @@
 ---
-title: "My Data Was Exposed. What Am I Supposed to Do Now?"
-description: "Got a data breach notice? Use this practical checklist to assess what was leaked, protect against impersonation scams, and limit future exposure."
+title: My Data Was Exposed. What Am I Supposed to Do Now?
+description: Got a data breach notice? Use this practical checklist to assess what was leaked, protect against impersonation scams, and limit future exposure.
 pubDate: 2026-11-13T00:00:00+08:00
 category: security
 tags:
   - data-breach
   - privacy
-  - cybersecurity
+  - Cybersecurity
   - singapore
 keywords:
   - data-breach
   - privacy
-  - cybersecurity
+  - Cybersecurity
   - singapore
 draft: false
 fmContentType: blog
+slug: data-exposed-supposed
 ---
 
 # My Data Was Exposed. What Am I Supposed to Do Now?

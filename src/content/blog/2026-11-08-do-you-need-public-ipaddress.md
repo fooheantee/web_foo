@@ -1,7 +1,7 @@
 ---
 title: Do You Still Need a Public IP Address to Self-Host at Home?
 description: Static IP, DDNS, CGNAT or Cloudflare Tunnel? Explore how home hosting has evolved and why exposing your home network may no longer be necessary.
-pubDate: 2026-11-08
+pubDate: 2026-11-07T15:57:20.547Z
 tags:
   - Homelab
   - Networking
@@ -14,9 +14,8 @@ keywords:
   - Cybersecurity
   - Cloudflare
   - Self-Hosting
-date: 2026-11-07T15:57:20.547Z
 slug: do-you-need-public-ip-address
-category: "homelab"
+category: homelab
 draft: false
 fmContentType: blog
 ---

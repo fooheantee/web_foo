@@ -4,8 +4,9 @@ description: "An old Windows machine, a vendor who said 'die die must use IIS Ma
 pubDate: 2026-10-31T04:28:31.785Z
 category: "identity"
 draft: false
+slug: one-machine-one-cert
 tags:
-  - cybersecurity
+  - Cybersecurity
   - operational-technology
   - windows
   - certificates

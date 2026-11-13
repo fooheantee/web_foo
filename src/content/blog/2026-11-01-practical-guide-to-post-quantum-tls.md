@@ -1,21 +1,21 @@
 ---
 title: "Post-Quantum TLS: You Don't Need New Certificates to Start"
 description: A TLS handshake does two separate jobs. Post-quantum protection for key exchange can start now, with the certificates you already have.
-pubDate: 2026-11-01
+pubDate: 2026-11-01T03:40:16.677Z
 tags:
   - pqc
   - tls
   - pki
-  - security
+  - Cybersecurity
 keywords:
   - pqc
   - tls
   - pki
-  - security
-date: 2026-11-01T03:40:16.677Z
+  - Cybersecurity
 slug: post-quantum-tls-don-certificates-start
-category: "identity"
+category: identity
 draft: false
+fmContentType: blog
 ---
 
 If you mention Post-Quantum Cryptography (PQC) to an IT or security team, someone will usually raise their hand and ask, "Where do we get quantum-safe certificates?" I used to think the exact same thing, mostly because buying a new certificate sounded like an easy box to tick.

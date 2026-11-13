@@ -9,17 +9,15 @@ draft: false
 tags:
   - Code Hosting
   - Astro Static pages
-  - Cloudflare Wrangler
-  - Cloudflare Static Assets
+  - Cloudflare
   - GitHub Actions
-  - Dependablot
+  - Dependabot
 keywords:
   - Code Hosting
   - Astro Static pages
-  - Cloudflare Wrangler
-  - Cloudflare Static Assets
+  - Cloudflare
   - GitHub Actions
-  - Dependablot
+  - Dependabot
 ---
 
 My previous web-development experience dates back to the last millennium: HTML in Notepad, a site on GeoCities, and eventually Macromedia Dreamweaver.

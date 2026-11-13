@@ -7,13 +7,13 @@ slug: first-post-hello
 category: "dev"
 draft: false
 tags:
-  - Home lab
+  - Homelab
   - Hello World
   - CI/CD
   - Serverless architecture
   - Full-stack serverless applications
 keywords:
-  - Home lab
+  - Homelab
   - Hello World
   - CI/CD
   - Serverless architecture

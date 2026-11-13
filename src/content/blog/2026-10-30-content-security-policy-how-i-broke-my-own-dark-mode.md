@@ -3,23 +3,23 @@ title: "Content Security Policy: How I Broke My Own Dark Mode"
 description: How CSP blocked my Astro blog’s dark mode, what restored it, and the security trade-offs behind the fix.
 slug: csp-how-i-broke
 category: "security"
-draft: false
-tags:
-  - cybersecurity
-  - application-security
-  - web-security
-  - content-security-policy
-  - astro
-  - cloudflare
-keywords:
-  - cybersecurity
-  - application-security
-  - web-security
-  - content-security-policy
-  - astro
-  - cloudflare
 pubDate: 2026-10-30T04:33:00.003Z
 fmContentType: blog
+draft: false
+tags:
+  - Cybersecurity
+  - application-security
+  - web-security
+  - content-security-policy
+  - Astro
+  - Cloudflare
+keywords:
+  - Cybersecurity
+  - application-security
+  - web-security
+  - content-security-policy
+  - Astro
+  - Cloudflare
 ---
 
 In my previous application security (AppSec) role, I reviewed client websites and often recommended security headers, including Content Security Policy (CSP).
