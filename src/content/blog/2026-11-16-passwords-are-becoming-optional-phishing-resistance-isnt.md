@@ -39,7 +39,7 @@ The biggest trap in modern identity migrations is treating "passwordless" and "p
 
 Phone push approvals, SMS codes, and email OTPs remove typed passwords, yet Adversary-in-the-Middle (AiTM) reverse-proxy toolkits bypass them daily. When a user signs in through a look-alike proxy domain, the attacker relays credentials and push approvals in real time and captures the resulting authenticated session cookie.
 
-Origin-bound cryptographic credentials—such as FIDO2 security keys, passkeys, and Windows Hello for Business—bind the cryptographic challenge directly to the legitimate domain. When presented with a spoofed proxy URL, the authenticator refuses to sign the challenge and blocks the session structurally.
+Origin-bound cryptographic credentials such as FIDO2 security keys, passkeys, and Windows Hello for Business bind the cryptographic challenge directly to the legitimate domain. When presented with a spoofed proxy URL, the authenticator refuses to sign the challenge and blocks the session structurally.
 
 ```mermaid
 graph TD
@@ -75,11 +75,11 @@ You cannot migrate every user to passkeys overnight. While closing the legacy ga
 
 A safe enterprise rollout sequences user enrollment before policy enforcement:
 
-- **Phase 0 — Baseline and Risk Segmentation:** Inventory authentication methods and segment users into Admin, Remote, Kiosk, and Legacy cohorts.
-- **Phase 1 — Eliminate the Weakest MFA:** Deprecate SMS, voice, and email OTPs first. Avoid relying solely on mobile push notifications in regions with restricted push ecosystems.
-- **Phase 2 & 3 — Deploy Strong Credentials:** Issue physical FIDO2 keys to admins and kiosk workers, enable Windows Hello for Business across managed Windows endpoints, and roll out device-bound Authenticator passkeys for remote staff.
-- **Phase 4 — Context-Aware Conditional Access:** Enforce tiered policies (`CA-PR-Admin` for privileged portals, `CA-PR-SensitiveApps` for Finance/HR/code repositories, `CA-Transition` with a strict sunset date, and `CA-Legacy-Block` to block legacy protocols).
-- **Phase 5 — Password Retirement:** Remove password fallback paths once strong credential coverage reaches target thresholds.
+- **Phase 0 - Baseline and Risk Segmentation:** Inventory authentication methods and segment users into Admin, Remote, Kiosk, and Legacy cohorts.
+- **Phase 1 - Eliminate the Weakest MFA:** Deprecate SMS, voice, and email OTPs first. Avoid relying solely on mobile push notifications in regions with restricted push ecosystems.
+- **Phase 2 & 3 - Deploy Strong Credentials:** Issue physical FIDO2 keys to admins and kiosk workers, enable Windows Hello for Business across managed Windows endpoints, and roll out device-bound Authenticator passkeys for remote staff.
+- **Phase 4 - Context-Aware Conditional Access:** Enforce tiered policies (`CA-PR-Admin` for privileged portals, `CA-PR-SensitiveApps` for Finance/HR/code repositories, `CA-Transition` with a strict sunset date, and `CA-Legacy-Block` to block legacy protocols).
+- **Phase 5 - Password Retirement:** Remove password fallback paths once strong credential coverage reaches target thresholds.
 
 ### Edge Cases and Rollout Guardrails
 
