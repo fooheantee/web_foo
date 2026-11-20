@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.23.4"
+    "node": ">=26.0.0"
   },
   "scripts": {
     "dev": "astro dev",
@@ -12,6 +12,7 @@
     "astro": "astro",
     "check": "astro check",
     "format:check": "prettier --check .",
+    "verify": "npm run format:check && npm audit --audit-level=high && npm run check && npm run build",
     "deploy": "wrangler deploy"
   },
   "dependencies": {
@@ -53,9 +54,8 @@
     "wrangler": "^4.153.0"
   },
   "allowScripts": {
-    "sharp@0.33.5": true,
     "sharp@0.35.5": true,
     "esbuild@0.28.2": true,
-    "workerd@1.20261109.1": true
+    "workerd@1.20261118.1": true
   }
 }

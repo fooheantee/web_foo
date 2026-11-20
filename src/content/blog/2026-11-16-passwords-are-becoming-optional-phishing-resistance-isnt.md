@@ -20,7 +20,7 @@ keywords:
   - AiTM phishing
 ---
 
-_Originally shared as a LinkedIn framework in July 2026, adapted here for `heantee.foo` with updated tables, architecture diagrams, and a downloadable PDF playbook._
+_Originally shared as a LinkedIn article in July 2026, adapted here for `heantee.foo` with updated tables, architecture diagrams, and a downloadable PDF playbook._
 
 Passwords are becoming optional. Phishing resistance isn't.
 

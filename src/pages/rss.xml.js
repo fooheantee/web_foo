@@ -3,7 +3,7 @@ import rss from "@astrojs/rss";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 export async function GET(context) {
-  const posts = (await getCollection("blog")).sort(
+  const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
 
@@ -12,31 +12,29 @@ export async function GET(context) {
     description: SITE_DESCRIPTION,
     site: context.site,
     items: posts.map((post) => {
-      // Option A: Use post heroImage if present, fallback to site favicon SVG
-      const imageUrl = post.data.heroImage
-        ? new URL(post.data.heroImage.src, context.site).toString()
-        : new URL("/favicon.svg", context.site).toString();
+      const heroSrc = post.data.heroImage?.src;
+      const imageUrl = heroSrc
+        ? new URL(heroSrc, context.site).toString()
+        : new URL("/os-seal.png", context.site).toString();
 
-      const imageType = post.data.heroImage ? "image/jpeg" : "image/svg+xml";
+      const imageType = heroSrc?.endsWith(".webp") ? "image/webp" : "image/png";
 
       return {
         title: post.data.title,
         pubDate: post.data.pubDate,
         description: post.data.description,
         link: `/blog/${post.id}/`,
-        categories: [post.data.category, ...(post.data.tags || [])],
-        customData: `
-					<enclosure url="${imageUrl}" type="${imageType}" length="0" />
-				`,
+        categories: post.data.tags || [],
+        customData: `<enclosure url="${imageUrl}" type="${imageType}" length="0" />`,
       };
     }),
     customData: `
-					<language>en-us</language>
-    				<image>
-					<url>${new URL("/favicon.svg", context.site)}</url>
-					<title>${SITE_TITLE}</title>
-					<link>${context.site}</link>
-    				</image>
-		`,
+      <language>en-us</language>
+      <image>
+        <url>${new URL("/os-seal.png", context.site)}</url>
+        <title>${SITE_TITLE}</title>
+        <link>${context.site}</link>
+      </image>
+    `,
   });
 }

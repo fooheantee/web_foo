@@ -1,10 +1,11 @@
 {
   "name": "my-astro-static-site",
   "main": "src/worker.js",
-  "compatibility_date": "2026-10-24",
+  "compatibility_date": "2026-11-20",
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page",
+    "run_worker_first": ["/", "/about/*", "/blog/*", "/404.html"],
   },
   "routes": [
     { "pattern": "heantee.foo", "custom_domain": true },

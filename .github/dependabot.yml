@@ -1,9 +1,27 @@
 version: 2
 
 updates:
-  # Keep npm dependencies up to date on the default branch.
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
     open-pull-requests-limit: 10
+    groups:
+      astro-and-cloudflare:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "wrangler"
+          - "@cloudflare/*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "typescript"
+        versions: [">= 7.0.0"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

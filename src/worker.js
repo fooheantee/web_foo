@@ -13,9 +13,10 @@ export default {
 
     const cspHeader = [
       `default-src 'self'`,
-      `script-src 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' https:`,
+      `script-src 'nonce-${nonce}' 'strict-dynamic' https:`,
       `style-src 'self' 'unsafe-inline'`,
       `img-src 'self' data: https:`,
+      `connect-src 'self' https://cloudflareinsights.com https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev`,
       `font-src 'self' data:`,
       `object-src 'none'`,
       `base-uri 'self'`,
