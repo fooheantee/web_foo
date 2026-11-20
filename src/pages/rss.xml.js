@@ -13,6 +13,7 @@ export async function GET(context) {
     site: context.site,
     xmlns: {
       atom: "http://www.w3.org/2005/Atom",
+      media: "http://search.yahoo.com/mrss/",
     },
     items: posts.map((post) => {
       const heroSrc = post.data.heroImage?.src;
@@ -28,7 +29,10 @@ export async function GET(context) {
         description: post.data.description,
         link: `/blog/${post.id}/`,
         categories: post.data.tags || [],
-        customData: `<enclosure url="${imageUrl}" type="${imageType}" length="0" />`,
+        customData: `
+          <enclosure url="${imageUrl}" type="${imageType}" length="0" />
+          <media:content url="${imageUrl}" medium="image" type="${imageType}" />
+        `,
       };
     }),
     customData: `
