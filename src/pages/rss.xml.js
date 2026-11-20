@@ -14,12 +14,13 @@ export async function GET(context) {
     xmlns: {
       atom: "http://www.w3.org/2005/Atom",
       media: "http://search.yahoo.com/mrss/",
+      content: "http://purl.org/rss/1.0/modules/content/",
     },
     items: posts.map((post) => {
       const heroSrc = post.data.heroImage?.src;
       const imageUrl = heroSrc
         ? new URL(heroSrc, context.site).toString()
-        : new URL("/os-seal.png", context.site).toString();
+        : new URL("/og-seal.png", context.site).toString();
 
       const imageType = heroSrc?.endsWith(".webp") ? "image/webp" : "image/png";
 
@@ -32,6 +33,8 @@ export async function GET(context) {
         customData: `
           <enclosure url="${imageUrl}" type="${imageType}" length="0" />
           <media:content url="${imageUrl}" medium="image" type="${imageType}" />
+          <media:thumbnail url="${imageUrl}" />
+          <content:encoded><![CDATA[<p><img src="${imageUrl}" alt="${post.data.title}" /></p><p>${post.data.description}</p>]]></content:encoded>
         `,
       };
     }),
@@ -39,7 +42,7 @@ export async function GET(context) {
       <language>en-us</language>
       <atom:link href="${new URL("rss.xml", context.site)}" rel="self" type="application/rss+xml" />
       <image>
-        <url>${new URL("/os-seal.png", context.site)}</url>
+        <url>${new URL("/og-seal.png", context.site)}</url>
         <title>${SITE_TITLE}</title>
         <link>${context.site}</link>
       </image>
