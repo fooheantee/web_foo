@@ -15,11 +15,13 @@ export default {
       `default-src 'self'`,
       `script-src 'nonce-${nonce}' 'strict-dynamic' https:`,
       `style-src 'self' 'unsafe-inline'`,
-      `img-src 'self' data: https:`,
+      `img-src 'self' data:`,
       `connect-src 'self' https://cloudflareinsights.com https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev`,
       `font-src 'self' data:`,
       `object-src 'none'`,
       `base-uri 'self'`,
+      `form-action 'self'`,
+      `frame-ancestors 'none'`,
     ].join("; ");
 
     const rewriter = new HTMLRewriter().on("script", {
