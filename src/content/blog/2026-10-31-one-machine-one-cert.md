@@ -149,7 +149,7 @@ And sometimes the best solution is not another tool to install. It is learning t
 
 ## References
 
-- [Microsoft: `certreq` command](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/certreq)
+- [Microsoft: `certreq` command](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/certreq_1)
 - [Microsoft: `certutil` command](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/certutil)
 - [Microsoft: Add a subject alternative name to a secure LDAP certificate](https://learn.microsoft.com/en-us/troubleshoot/windows-server/certificates-and-public-key-infrastructure-pki/add-san-to-secure-ldap-certificate)
 - [RFC 9525: Service Identity in TLS](https://www.rfc-editor.org/rfc/rfc9525)

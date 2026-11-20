@@ -11,6 +11,9 @@ export async function GET(context) {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
+    xmlns: {
+      atom: "http://www.w3.org/2005/Atom",
+    },
     items: posts.map((post) => {
       const heroSrc = post.data.heroImage?.src;
       const imageUrl = heroSrc
@@ -30,6 +33,7 @@ export async function GET(context) {
     }),
     customData: `
       <language>en-us</language>
+      <atom:link href="${new URL("rss.xml", context.site)}" rel="self" type="application/rss+xml" />
       <image>
         <url>${new URL("/os-seal.png", context.site)}</url>
         <title>${SITE_TITLE}</title>
