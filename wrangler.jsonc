@@ -4,14 +4,15 @@
   "compatibility_date": "2026-11-20",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/", "/about/*", "/blog/*", "/404.html"],
+    "run_worker_first": ["/", "/about/*", "/blog/*", "/404.html"]
   },
   "routes": [
     { "pattern": "heantee.foo", "custom_domain": true },
-    { "pattern": "www.heantee.foo", "custom_domain": true },
+    { "pattern": "www.heantee.foo", "custom_domain": true }
   ],
   "observability": {
-    "enabled": true,
-  },
+    "enabled": true
+  }
 }
