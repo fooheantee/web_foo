@@ -1,74 +1,89 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
-//: # import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 ---
 
-<Layout
-	title="Foo HeanTee | IAM and Cybersecurity"
-	description="Foo HeanTee has 20 years in IT and over 10 in cybersecurity: IAM, PAM, Entra ID, CyberArk, Okta, SIEM, and application security."
-	pubDate={new Date('October 25 2026')}
-	tags={[]}
-	keywords={["IAM", "Cybersecurity", "PAM", "Entra ID", "Identity Security"]}
-  	draft={false}
-	{/* heroImage={AboutHeroImage} */}
-><h1>About Foo HeanTee</h1>
-	<p>I have around 20 years of experience in IT, including more than 10 years in cybersecurity. I started in software testing before moving into security engineering, consulting, advisory, and identity security.</p>
-<p>I enjoy solving technical problems, trying new technologies, and finding practical ways to improve security. I also like tinkering with technology, which is how I ended up building a home lab.</p>
-<h2 id="areas-of-expertise">Areas of Expertise</h2>
-<ul>
-<li><strong>Identity Security:</strong> IAM, PAM, Active Directory, Microsoft Entra ID, identity governance</li>
-<li><strong>Security Engineering:</strong> System hardening, security assessments, vulnerability management, endpoint protection</li>
-<li><strong>Security Operations:</strong> Incident response, SIEM, security monitoring, runbooks and SOPs</li>
-<li><strong>Application Security:</strong> Web and mobile application testing, secure application design</li>
-<li><strong>Cloud Security:</strong> Microsoft 365, Google Workspace, AWS</li>
-</ul>
-<h2 id="experience">Experience</h2>
-<h3 id="senior-expert-global-ict-identity-asmpt">Senior Expert, Global ICT Identity — ASMPT</h3>
-<p><em>August 2024 – Present</em></p>
-<ul>
-<li>Assessed and improved Active Directory security using PingCastle.</li>
-<li>Oversee the external service provider responsible for CyberArk PAM operations.</li>
-<li>Led the migration from USB code-signing tokens to a software-based solution.</li>
-</ul>
-<h3 id="senior-security-engineer-secretlab">Senior Security Engineer — Secretlab</h3>
-<p><em>February 2024 – August 2024</em></p>
-<ul>
-<li>Assessed the attack surface of the company and improved endpoint and Google Workspace security.</li>
-<li>Managed a password-spraying incident from initial alert through investigation, remediation, and final reporting.</li>
-</ul>
-<h3 id="strategic-security-advisor-proficio">Strategic Security Advisor — Proficio</h3>
-<p><em>February 2023 – February 2024</em></p>
-<ul>
-<li>Advised enterprise clients on security architecture and SIEM improvements.</li>
-<li>Presented security findings and recommendations during quarterly reviews with executives.</li>
-</ul>
-<h3 id="assistant-lead-engineer-ihis">Assistant Lead Engineer — IHiS</h3>
-<p><em>July 2021 – February 2023</em></p>
-<ul>
-<li>Deployed Palo Alto Traps malware protection across a healthcare cluster.</li>
-<li>Established OS patch management processes and monthly compliance reporting.</li>
-</ul>
-<h3 id="cyber-security-consultant-pam-operations-ensign-infosecurity">Cyber Security Consultant, PAM Operations — Ensign InfoSecurity</h3>
-<p><em>October 2019 – June 2021</em></p>
-<ul>
-<li>Delivered CyberArk projects, from pre-sales and deployment to documentation.</li>
-<li>Administered privileged access solutions for government agencies.</li>
-</ul>
-<h3 id="it-security-engineer-jabil">IT Security Engineer — Jabil</h3>
-<p><em>December 2015 – September 2019</em></p>
-<ul>
-<li>Led the rollout of Okta single sign-on across Asian sites and implemented MFA for VPN access.</li>
-<li>Led the CyberArk PAM rollout and integrated Workday with Okta for automated account provisioning.</li>
-<li>Also handled application security testing, vulnerability management, and 24/7 security operations.</li>
-</ul>
-<h3 id="earlier-experience">Earlier Experience</h3>
-<p><strong>eSecurity Engineer — Seagate</strong><br><em>January 2015 – December 2015</em></p>
-<ul>
-<li>Conducted web application security assessments and recommended fixes for vulnerabilities.</li>
-</ul>
-<p><strong>Software Test Engineer — Motorola Solutions</strong><br><em>April 2005 – January 2015</em></p>
-<ul>
-<li>Tested software for professional two-way radio systems used in mission-critical communications.</li>
-</ul>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Foo HeanTee | IAM and Cybersecurity"
+			description="Foo HeanTee has 20 years in IT and over 10 in cybersecurity: IAM, PAM, Entra ID, CyberArk, Okta, SIEM, and application security."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>About Foo HeanTee</h1>
+			<p>I have around 20 years of experience in IT, including more than 10 years in cybersecurity. I started in software testing before moving into security engineering, consulting, advisory, and identity security.</p>
+			<p>My day-to-day work centers on Active Directory hardening, privileged access management, and public PKI automation. Outside of work, I run a Proxmox home lab to test self-hosted infrastructure, network segmentation, and authentication setups.</p>
 
-</Layout>
+			<h2 id="areas-of-expertise">Areas of Expertise</h2>
+			<ul>
+				<li><strong>Identity Security:</strong> IAM, PAM, Active Directory, Microsoft Entra ID, identity governance</li>
+				<li><strong>Security Engineering:</strong> System hardening, security assessments, vulnerability management, endpoint protection</li>
+				<li><strong>Security Operations:</strong> Incident response, SIEM, security monitoring, runbooks and SOPs</li>
+				<li><strong>Application Security:</strong> Web and mobile application testing, secure application design</li>
+				<li><strong>Cloud Security:</strong> Microsoft 365, Google Workspace, AWS</li>
+			</ul>
+
+			<h2 id="experience">Experience</h2>
+
+			<h3 id="senior-expert-global-ict-identity-asmpt">Senior Expert, Global ICT Identity - ASMPT</h3>
+			<p><em>August 2024 – Present</em></p>
+			<ul>
+				<li>Assessed and improved Active Directory security using PingCastle.</li>
+				<li>Oversee the external service provider responsible for CyberArk PAM operations.</li>
+				<li>Led the migration from USB code-signing tokens to a software-based solution.</li>
+			</ul>
+
+			<h3 id="senior-security-engineer-secretlab">Senior Security Engineer - Secretlab</h3>
+			<p><em>February 2024 – August 2024</em></p>
+			<ul>
+				<li>Assessed the attack surface of the company and improved endpoint and Google Workspace security.</li>
+				<li>Managed a password-spraying incident from initial alert through investigation, remediation, and final reporting.</li>
+			</ul>
+
+			<h3 id="strategic-security-advisor-proficio">Strategic Security Advisor - Proficio</h3>
+			<p><em>February 2023 – February 2024</em></p>
+			<ul>
+				<li>Advised enterprise clients on security architecture and SIEM improvements.</li>
+				<li>Presented security findings and recommendations during quarterly reviews with executives.</li>
+			</ul>
+
+			<h3 id="assistant-lead-engineer-ihis">Assistant Lead Engineer - IHiS</h3>
+			<p><em>July 2021 – February 2023</em></p>
+			<ul>
+				<li>Deployed Palo Alto Traps malware protection across a healthcare cluster.</li>
+				<li>Established OS patch management processes and monthly compliance reporting.</li>
+			</ul>
+
+			<h3 id="cyber-security-consultant-pam-operations-ensign-infosecurity">Cyber Security Consultant, PAM Operations  - Ensign InfoSecurity</h3>
+			<p><em>October 2019 – June 2021</em></p>
+			<ul>
+				<li>Delivered CyberArk projects, from pre-sales and deployment to documentation.</li>
+				<li>Administered privileged access solutions for government agencies.</li>
+			</ul>
+
+			<h3 id="it-security-engineer-jabil">IT Security Engineer - Jabil</h3>
+			<p><em>December 2015 – September 2019</em></p>
+			<ul>
+				<li>Led the rollout of Okta single sign-on across Asian sites and implemented MFA for VPN access.</li>
+				<li>Led the CyberArk PAM rollout and integrated Workday with Okta for automated account provisioning.</li>
+				<li>Also handled application security testing, vulnerability management, and 24/7 security operations.</li>
+			</ul>
+
+			<h3 id="earlier-experience">Earlier Experience</h3>
+			<p><strong>eSecurity Engineer - Seagate</strong><br /><em>January 2015 – December 2015</em></p>
+			<ul>
+				<li>Conducted web application security assessments and recommended fixes for vulnerabilities.</li>
+			</ul>
+			<p><strong>Software Test Engineer - Motorola Solutions</strong><br /><em>April 2005 – January 2015</em></p>
+			<ul>
+				<li>Tested software for professional two-way radio systems used in mission-critical communications.</li>
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
