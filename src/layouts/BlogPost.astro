@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import CategoryIcon from '../components/CategoryIcon.astro';
 import Footer from '../components/Footer.astro';
@@ -12,6 +12,21 @@ type Props = Omit<CollectionEntry<'blog'>['data'], 'category'> & {
 };
 
 const { title, description, pubDate, updatedDate, heroImage, category = 'security' } = Astro.props;
+
+const normalizePath = (path: string) => path.replace(/\/+$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const currentIndex = posts.findIndex(
+	(post) => normalizePath(`/blog/${post.id}/`) === currentPath,
+);
+
+const newerPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+const olderPost =
+	currentIndex !== -1 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
 ---
 
 <html lang="en">
@@ -55,6 +70,76 @@ const { title, description, pubDate, updatedDate, heroImage, category = 'securit
 			.last-updated-on {
 				font-style: italic;
 			}
+			.post-nav {
+				margin-top: 3rem;
+				padding-top: 1.5rem;
+				border-top: 1px solid var(--border-color);
+			}
+			.post-nav-links {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 1rem;
+				margin-bottom: 1.5rem;
+			}
+			.post-nav-link {
+				display: flex;
+				flex-direction: column;
+				gap: 0.25rem;
+				padding: 0.75rem;
+				border: 1px solid var(--border-color);
+				border-radius: 6px;
+				text-decoration: none;
+				color: var(--text-color);
+				transition: border-color 0.15s ease, background-color 0.15s ease;
+			}
+			.post-nav-link:hover {
+				border-color: var(--accent-color);
+				background-color: var(--code-bg);
+			}
+			.post-nav-link:focus-visible {
+				outline: 2px solid var(--accent-color);
+				outline-offset: 2px;
+			}
+			.post-nav-link.next {
+				text-align: right;
+			}
+			.post-nav-label {
+				font-size: 0.8125rem;
+				color: var(--muted-text);
+			}
+			.post-nav-title {
+				font-weight: 600;
+				font-size: 0.9375rem;
+				line-height: 1.4;
+			}
+			.back-to-blog {
+				text-align: center;
+			}
+			.back-to-blog a {
+				display: inline-block;
+				padding: 0.5rem 0.75rem;
+				color: var(--muted-text);
+				text-decoration: none;
+				font-size: 0.9375rem;
+				border-radius: 6px;
+				transition: color 0.15s ease, background-color 0.15s ease;
+			}
+			.back-to-blog a:hover {
+				color: var(--accent-color);
+				background-color: var(--code-bg);
+			}
+			.back-to-blog a:focus-visible {
+				outline: 2px solid var(--accent-color);
+				outline-offset: 2px;
+			}
+			@media (max-width: 600px) {
+				.post-nav-links {
+					grid-template-columns: 1fr;
+				}
+				.post-nav-link.next {
+					text-align: left;
+				}
+			}
 		</style>
 	</head>
 
@@ -81,6 +166,31 @@ const { title, description, pubDate, updatedDate, heroImage, category = 'securit
 						<hr />
 					</div>
 					<slot />
+					<nav class="post-nav" aria-label="Post navigation">
+						{
+							(olderPost || newerPost) && (
+								<div class="post-nav-links">
+									{olderPost ? (
+										<a href={`/blog/${olderPost.id}/`} class="post-nav-link prev">
+											<span class="post-nav-label">← Previous post</span>
+											<span class="post-nav-title">{olderPost.data.title}</span>
+										</a>
+									) : (
+										<span />
+									)}
+									{newerPost && (
+										<a href={`/blog/${newerPost.id}/`} class="post-nav-link next">
+											<span class="post-nav-label">Next post →</span>
+											<span class="post-nav-title">{newerPost.data.title}</span>
+										</a>
+									)}
+								</div>
+							)
+						}
+						<div class="back-to-blog">
+							<a href="/blog/">← Back to Blog</a>
+						</div>
+					</nav>
 				</div>
 			</article>
 		</main>
