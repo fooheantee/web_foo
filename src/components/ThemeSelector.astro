@@ -3,7 +3,18 @@
 ---
 
 <button type="button" aria-label="Toggle theme" class="theme-toggle-btn">
-	<svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+	<svg
+		class="sun-icon"
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2.5"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+	>
 		<circle cx="12" cy="12" r="4"></circle>
 		<path d="M12 2v2"></path>
 		<path d="M12 20v2"></path>
@@ -14,33 +25,47 @@
 		<path d="m6.34 17.66-1.41 1.41"></path>
 		<path d="m19.07 4.93-1.41 1.41"></path>
 	</svg>
-	
-	<svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+
+	<svg
+		class="moon-icon"
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2.5"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+	>
 		<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
 	</svg>
 </button>
 
 <script>
+	const toggleTheme = () => {
+		const isDark =
+			document.documentElement.classList.contains('dark') ||
+			document.documentElement.getAttribute('data-theme') === 'dark';
+		const nextTheme = isDark ? 'light' : 'dark';
+
+		document.documentElement.classList.toggle('dark', !isDark);
+		document.documentElement.classList.toggle('light', isDark);
+		document.documentElement.setAttribute('data-theme', nextTheme);
+
+		try {
+			localStorage.setItem('theme', nextTheme);
+		} catch (e) {
+			console.warn('LocalStorage unavailable:', e);
+		}
+	};
+
 	const setupThemeToggle = () => {
-		const buttons = document.querySelectorAll('.theme-toggle-btn');
-		if (!buttons.length) return;
-
+		const buttons = document.querySelectorAll<HTMLButtonElement>('.theme-toggle-btn');
 		buttons.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				const isDark =
-					document.documentElement.classList.contains('dark') ||
-					document.documentElement.getAttribute('data-theme') === 'dark';
-				const nextTheme = isDark ? 'light' : 'dark';
-
-				document.documentElement.classList.toggle('dark', !isDark);
-				document.documentElement.setAttribute('data-theme', nextTheme);
-
-				try {
-					localStorage.setItem('theme', nextTheme);
-				} catch (e) {
-					console.warn('LocalStorage unavailable:', e);
-				}
-			});
+			if (btn.dataset.themeBound === 'true') return;
+			btn.dataset.themeBound = 'true';
+			btn.addEventListener('click', toggleTheme);
 		});
 	};
 
@@ -58,8 +83,8 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		min-width: 40px;
-		min-height: 40px;
+		min-width: 44px;
+		min-height: 44px;
 		z-index: 50;
 		color: var(--text-color);
 		transition: background-color 0.2s ease, color 0.2s ease;
@@ -72,8 +97,12 @@
 		pointer-events: none;
 	}
 
-	.sun-icon { display: none !important; }
-	.moon-icon { display: block !important; }
+	.sun-icon {
+		display: none !important;
+	}
+	.moon-icon {
+		display: block !important;
+	}
 
 	:global(html.dark) .sun-icon,
 	:global(html[data-theme='dark']) .sun-icon {

@@ -1,13 +1,15 @@
-<script>
+<script is:inline>
 	const applyTheme = () => {
 		try {
 			const storedTheme = localStorage.getItem('theme');
-			let theme = storedTheme;
-			if (!theme) {
-				theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-			}
+			const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+				? 'dark'
+				: 'light';
+			const theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : systemTheme;
 			const isDark = theme === 'dark';
+
 			document.documentElement.classList.toggle('dark', isDark);
+			document.documentElement.classList.toggle('light', !isDark);
 			document.documentElement.setAttribute('data-theme', theme);
 		} catch (e) {
 			console.warn('LocalStorage error:', e);
@@ -16,5 +18,4 @@
 
 	applyTheme();
 	document.addEventListener('astro:after-swap', applyTheme);
-	document.addEventListener('astro:page-load', applyTheme);
 </script>
