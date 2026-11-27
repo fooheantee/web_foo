@@ -1,5 +1,5 @@
 ---
-title: From GeoCities to Git Push
+title: "From GeoCities to Git Push: How I Built This Site"
 description: "Astro & Cloudflare Workers architecture: Build a static site with GitHub Actions featuring automated testing, credential isolation, and clean rollbacks."
 pubDate: 2026-10-25T16:00:00.000Z
 fmContentType: blog
