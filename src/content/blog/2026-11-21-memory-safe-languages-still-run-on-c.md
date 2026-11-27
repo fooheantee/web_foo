@@ -26,13 +26,13 @@ keywords:
 
 In my past life as a software test engineer and low-level programmer (not what you might think,I mean C programming and Real-Time Operating Systems, or RTOS), buffer overflows were one of my most dreaded bugs. Troubleshooting them meant hooking up a JTAG hardware debugger and manually crawling through raw memory addresses just to see where data had spilled over the line.
 
-If you write modern web applications in Java, PHP, or Ruby, you probably assume those low-level memory headaches are ancient history. Then November 2026 happened. Within days, a wave of critical vulnerabilities hit OpenSSL, Java, Ruby, PHP, and NGINX; reminding us that memory-safe languages still rest on a foundation of C and C++.
+If you write modern web applications in Java, PHP, or Ruby, you probably assume those low-level memory headaches are ancient history. Then November 2026 happened. Within days, a wave of critical vulnerabilities hit OpenSSL, Java, Ruby, PHP, and NGINX, reminding us that memory-safe languages still rest on a foundation of C and C++.
 
 ## What Is a Buffer Overflow?
 
 A buffer is simply a fixed-size block of memory reserved to hold temporary data, like an incoming network packet or user input. A **buffer overflow** happens when a program writes more data into that space than it was built to hold, overwriting whatever sits next to it in memory.
 
-Think of it like pouring two liters of water into a one-liter bottle; except the excess water doesn't just make a mess on the table; it rewrites the labels on the bottles next to it. Attackers exploit that spillover to corrupt data, crash services, or hijack execution flow to run their own code.
+Think of it like pouring two liters of water into a one-liter bottle; except the excess water doesn't just make a mess on the table, it rewrites the labels on the bottles next to it. Attackers exploit that spillover to corrupt data, crash services, or hijack execution flow to run their own code.
 
 In modern environments, these flaws usually show up in three ways:
 
@@ -80,7 +80,7 @@ Here is how those hidden C and C++ dependencies played out across five major tec
 
 - **CVSS Score:** Critical (GitHub Security Advisory) / 7.4 High (CVSS v3.1)
 - **Vulnerability Type:** Heap-based Buffer Overflow
-- **How it happens:** This bug lives in the C-based Ruby interpreter's string case-conversion logic. When converting text in legacy single-byte encodings (such as ISO-8859-1 or Windows-1252), the German sharp s (`ß`) expands from one byte into two (`SS`). A missing bounds check on that second byte causes a one-byte heap buffer overflow; enough to corrupt adjacent heap memory. Researchers say it can lead to remote code execution, including on default Rails apps. The same release fixed seven Ruby issues in total.
+- **How it happens:** This bug lives in the C-based Ruby interpreter's string case-conversion logic. When converting text in legacy single-byte encodings (such as ISO-8859-1 or Windows-1252), the German sharp s (`ß`) expands from one byte into two (`SS`). A missing bounds check on that second byte causes a one-byte heap buffer overflow, enough to corrupt adjacent heap memory. Researchers say it can lead to remote code execution, including on default Rails apps. The same release fixed seven Ruby issues in total.
 
 ### 4. PHP and Brotli: CVE-2026-111497 & CVE-2026-129481
 

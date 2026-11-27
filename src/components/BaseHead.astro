@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { SITE_TITLE } from '../consts';
-import { Font } from 'astro:assets';
 import ThemeScript from './ThemeScript.astro';
 
 interface Props {
@@ -50,9 +49,6 @@ if (typeof image === 'object' && image !== null && 'src' in image) {
 	href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
-
-<!-- Font Definition -->
-<Font cssVariable="--font-atkinson" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
