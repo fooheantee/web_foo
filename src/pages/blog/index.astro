@@ -10,13 +10,21 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
+const categoryCounts = posts.reduce<Record<string, number>>((acc, post) => {
+	const key = (post.data.category || '').toLowerCase();
+	if (key) {
+		acc[key] = (acc[key] ?? 0) + 1;
+	}
+	return acc;
+}, {});
+
 const categories = [
-	{ id: 'all', label: 'All' },
-	{ id: 'identity', label: 'Identity' },
-	{ id: 'homelab', label: 'Homelab' },
-	{ id: 'security', label: 'Security' },
-	{ id: 'dev', label: 'Dev' },
-	{ id: 'architecture', label: 'Architecture' },
+	{ id: 'all', label: 'All', count: posts.length },
+	{ id: 'identity', label: 'Identity', count: categoryCounts.identity ?? 0 },
+	{ id: 'homelab', label: 'Homelab', count: categoryCounts.homelab ?? 0 },
+	{ id: 'security', label: 'Security', count: categoryCounts.security ?? 0 },
+	{ id: 'dev', label: 'Dev', count: categoryCounts.dev ?? 0 },
+	{ id: 'architecture', label: 'Architecture', count: categoryCounts.architecture ?? 0 },
 ];
 ---
 
@@ -59,12 +67,17 @@ const categories = [
 				color: var(--muted-text);
 				border: 1px solid var(--border-color);
 				text-decoration: none;
+				scroll-margin-top: 7rem;
 				transition: all 0.15s ease;
 			}
 
 			.filter-pill:hover {
 				color: var(--text-color);
 				border-color: var(--accent-color);
+			}
+
+			.filter-pill:focus-visible {
+				border-radius: 9999px;
 			}
 
 			.filter-pill.active {
@@ -94,23 +107,62 @@ const categories = [
 				transition: 0.2s ease;
 			}
 
-			/* Featured Card Styling when on All view */
+			/* Full-Width Featured Card Styling when on All view */
+			.filter-all ul li:first-child {
+				width: 100%;
+			}
 			.filter-all ul li:first-child a {
-				padding: 1.75rem 1.5rem;
+				padding: 1.5rem;
 				border-radius: 12px;
-				background-color: var(--card-bg, rgba(128, 128, 128, 0.05));
-				border: 1px solid var(--border-color, rgba(128, 128, 128, 0.12));
-				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+				background-color: var(--code-bg);
+				border: 1px solid var(--border-color);
+				transition: border-color 0.15s ease;
+			}
+			.filter-all ul li:first-child a:hover,
+			.filter-all ul li:first-child a:focus-visible {
+				border-color: var(--accent-color);
+			}
+			.filter-all ul li:first-child a:focus-visible {
+				border-radius: 12px;
 			}
 			.filter-all ul li:first-child .title {
-				font-size: 2rem;
+				font-size: 1.75rem;
 			}
 			.filter-all ul li:first-child .meta-row {
 				justify-content: flex-start;
 			}
 
+			.latest-badge {
+				display: none;
+				margin-left: 0.25rem;
+				padding: 0.1rem 0.55rem;
+				border-radius: 9999px;
+				font-size: 0.75rem;
+				font-weight: 600;
+				letter-spacing: 0.03em;
+				text-transform: uppercase;
+				background-color: var(--background-color);
+				color: var(--accent-color);
+				border: 1px solid var(--border-color);
+			}
+			.filter-all ul li:first-child .latest-badge {
+				display: inline-block;
+			}
+
+			.featured-desc {
+				display: none;
+				margin: 0.65rem 0 0 0;
+				color: var(--muted-text);
+				font-size: 0.95rem;
+				line-height: 1.5;
+			}
+			.filter-all ul li:first-child .featured-desc {
+				display: block;
+			}
+
 			ul li a {
 				display: block;
+				scroll-margin-top: 7rem;
 			}
 			.meta-row {
 				display: flex;
@@ -130,11 +182,13 @@ const categories = [
 				color: var(--muted-text);
 			}
 
-			/* Hover Highlights */
-			ul li a:hover h4 {
+			/* Hover and Keyboard Focus Highlights */
+			ul li a:hover h4,
+			ul li a:focus-visible h4 {
 				color: var(--accent-color);
 			}
-			ul li a:hover :global(.category-icon) {
+			ul li a:hover :global(.category-icon),
+			ul li a:focus-visible :global(.category-icon) {
 				color: var(--accent-color);
 				transform: translateY(-1px);
 			}
@@ -161,7 +215,7 @@ const categories = [
 					padding: 1.25rem 1rem;
 				}
 				.filter-all ul li:first-child .title {
-					font-size: 1.5em;
+					font-size: 1.4rem;
 				}
 			}
 		</style>
@@ -178,14 +232,14 @@ const categories = [
 						class="filter-pill"
 						data-category={cat.id}
 					>
-						{cat.label}
+						{cat.label} ({cat.count})
 					</a>
 				))}
 			</nav>
 
 			<section id="posts-container" class="filter-all">
 				<ul id="post-list">
-					{posts.map((post) => (
+					{posts.map((post, index) => (
 						<li data-category={post.data.category}>
 							<a href={`/blog/${post.id}/`}>
 								<div class="meta-row">
@@ -193,8 +247,12 @@ const categories = [
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
+									{index === 0 && <span class="latest-badge">Latest</span>}
 								</div>
 								<h4 class="title">{post.data.title}</h4>
+								{index === 0 && post.data.description && (
+									<p class="featured-desc">{post.data.description}</p>
+								)}
 							</a>
 						</li>
 					))}
