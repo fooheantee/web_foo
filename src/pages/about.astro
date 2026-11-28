@@ -16,6 +16,11 @@ import Header from '../components/Header.astro';
 		<Header />
 		<main>
 			<h1>About Foo HeanTee</h1>
+			<p class="print-only print-contact">
+				<a href="https://heantee.foo/">heantee.foo</a> |
+				<a href="mailto:hello@heantee.foo">hello@heantee.foo</a> |
+				<a href="https://www.linkedin.com/in/fooheantee/">linkedin.com/in/fooheantee</a>
+			</p>
 			<p>I have around 20 years of experience in IT, including more than 10 years in cybersecurity. I started in software testing before moving into security engineering, consulting, advisory, and identity security.</p>
 			<p>My day-to-day work centers on Active Directory hardening, privileged access management, and public PKI automation. Outside of work, I run a Proxmox home lab to test self-hosted infrastructure, network segmentation, and authentication setups.</p>
 
@@ -84,9 +89,9 @@ import Header from '../components/Header.astro';
 				<li>Tested software for professional two-way radio systems used in mission-critical communications.</li>
 			</ul>
 
-			<hr />
-			<p>
-				Want to see what I am currently building or breaking? Read my notes on <a href="/blog/"> identity security and homelab setups</a>.
+			<hr class="no-print" />
+			<p class="no-print">
+				Want to see what I am currently building or breaking? Read my notes on <a href="/blog/">identity security and homelab setups</a>.
 			</p>
 		</main>
 		<Footer />
